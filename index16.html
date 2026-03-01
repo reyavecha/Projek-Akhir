@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Todo list</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-bg: #ffffff;
+            --text-main: #333;
+            --primary: #4facfe;
+            --completed: #d1d1d1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Top Header */
+        .main {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .main h3 {
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .main h3 span { color: #007bff; }
+
+        /* Centered Container */
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        h2 {
+            color: white;
+            font-size: 3rem;
+            opacity: 0.4;
+            margin-bottom: 10px;
+            text-transform: lowercase;
+        }
+
+        form {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            background: white;
+        }
+
+        /* Input Styling */
+        input[type="text"] {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            font-size: 1.1rem;
+            outline: none;
+            color: #444;
+        }
+
+        input[type="text"]::placeholder {
+            color: #ccc;
+        }
+
+        /* List Styling */
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            background: white;
+            max-height: 400px;
+            overflow-y: auto;
+            text-align: left;
+        }
+
+        li {
+            border-top: 1px solid #f2f2f2;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        li:hover { background: #fafafa; }
+
+        li.completed {
+            color: var(--completed);
+            text-decoration: line-through;
+        }
+
+        small {
+            display: block;
+            margin-top: 30px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        /* iPhone SE Specific Fixes */
+        @media (max-width: 350px) {
+            h2 { font-size: 2.2rem; }
+            input[type="text"], li { padding: 0.8rem 1rem; font-size: 1rem; }
+            .container { margin-top: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <h3><span>Your</span>Todos</h3>
+    </div>
+
+    <div class="container">
+        <h2>Todos</h2>
+        <form id="form">
+            <input type="text" class="input" id="input" placeholder="Enter your todo" autocomplete="off">
+            <ul class="todos" id="todos"></ul>
+        </form>
+        <small>
+            Left click to toggle completed. <br>
+            Right click to delete todo.
+        </small>
+    </div>
+
+    <script>
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const todosUL = document.getElementById('todos');
+
+        // Load from LocalStorage
+        const savedTodos = JSON.parse(localStorage.getItem('todos')) || [];
+        savedTodos.forEach(todo => addTodo(todo));
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            addTodo();
+        });
+
+        function addTodo(todo) {
+            let todoText = input.value;
+
+            if (todo) {
+                todoText = todo.text;
+            }
+
+            if (todoText) {
+                const todoEl = document.createElement('li');
+                if (todo && todo.completed) {
+                    todoEl.classList.add('completed');
+                }
+
+                todoEl.innerText = todoText;
+
+                // Toggle Completed
+                todoEl.addEventListener('click', () => {
+                    todoEl.classList.toggle('completed');
+                    updateLS();
+                });
+
+                // Delete on Right Click
+                todoEl.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    todoEl.remove();
+                    updateLS();
+                });
+
+                todosUL.appendChild(todoEl);
+                input.value = '';
+                updateLS();
+            }
+        }
+
+        function updateLS() {
+            const todosEl = document.querySelectorAll('li'); // Fixed name
+            const todos = [];
+
+            todosEl.forEach(todoEl => {
+                todos.push({
+                    text: todoEl.innerText,
+                    completed: todoEl.classList.contains('completed')
+                });
+            });
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+    </script>
+</body>
+</html>

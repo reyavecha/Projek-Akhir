@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Loop Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4facfe;
+            --secondary: #00f2fe;
+            --dark: #1e293b;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Added padding so the card doesn't touch screen edges on mobile */
+            padding: 1rem; 
+            box-sizing: border-box;
+        }
+
+        .bungkus {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            width: 100%;
+            /* Max-width ensures it doesn't get too wide on desktop */
+            max-width: 500px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        h2 {
+            color: var(--dark);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: clamp(1.2rem, 5vw, 1.8rem); /* Fluid typography */
+        }
+
+        .input-group {
+            display: grid;
+            /* Automatically stacks on small screens, side-by-side on larger ones */
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .result-container {
+            text-align: left;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1.2rem;
+            max-height: 40vh; /* Relative to screen height */
+            overflow-y: auto;
+            border: 1px solid #e2e8f0;
+        }
+
+        #output {
+            line-height: 1.6;
+            font-size: 0.95rem;
+            word-wrap: break-word;
+        }
+
+        strong {
+            color: var(--primary);
+            display: block;
+            margin-top: 12px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
+
+        /* For small phones (e.g., iPhone SE) */
+        @media (max-width: 400px) {
+            .input-group {
+                grid-template-columns: 1fr; /* Stack input and button */
+            }
+            
+            .bungkus {
+                padding: 1.5rem;
+            }
+
+            button {
+                width: 100%; /* Full width button on mobile */
+            }
+        }
+
+        /* For tablet and up, add a slight hover effect to the card */
+        @media (min-width: 768px) {
+            .bungkus:hover {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bungkus">
+        <h2>Latihan For Loop</h2>
+        
+        <div class="input-group">
+            <input type="number" id="numberInput" placeholder="Angka...">
+            <button onclick="tampilkanAngka()">Proses</button>
+        </div>
+
+        <div class="result-container">
+            <div id="output">Hasil akan muncul di sini...</div>
+        </div>
+    </div>
+
+    <script>
+        function tampilkanAngka(){
+            const input = document.getElementById("numberInput");
+            const output = document.getElementById("output");
+            let angka = parseInt(input.value);
+
+            if (isNaN(angka) || angka <= 0) {
+                output.innerHTML = "<span style='color:red;'>Silakan masukkan angka positif.</span>";
+                return;
+            }
+
+            // Using an array and .join() is cleaner for responsiveness than manual string building
+            const createList = (limit, filterFn) => {
+                let items = [];
+                for(let i = 1; i <= limit; i++) {
+                    if(!filterFn || filterFn(i)) items.push(i);
+                }
+                return items.join(", ");
+            };
+
+            output.innerHTML = `
+                <strong>Angka 1 - ${angka}:</strong> ${createList(angka)}
+                <strong>Angka Genap:</strong> ${createList(angka, i => i % 2 === 0)}
+                <strong>Angka Ganjil:</strong> ${createList(angka, i => i % 2 !== 0)}
+                <strong>Kelipatan 3:</strong> ${createList(angka, i => i % 3 === 0)}
+            `;
+        }
+    </script>
+</body>
+</html>

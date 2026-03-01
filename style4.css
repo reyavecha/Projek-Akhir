@@ -1,0 +1,182 @@
+/* --- Global Styles --- */
+:root {
+    --primary: #1a73e8;
+    --dark: #202124;
+    --light-bg: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    background-color: var(--light-bg);
+    color: var(--dark);
+}
+
+/* --- Navbar --- */
+nav {
+    background: var(--dark);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+
+.navbar .logo a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+}
+
+/* --- Hardware Grid Section --- */
+#Picturess {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.row {
+    display: grid;
+    /* This creates a responsive grid automatically */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: var(--transition);
+    border: 1px solid #eee;
+    text-align: center;
+    padding: 20px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+    border-color: var(--primary);
+}
+
+.card img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.card h2 a {
+    text-decoration: none;
+    color: var(--dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+/* --- Description Sections --- */
+section:not(#Picturess) {
+    padding: 80px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 50px;
+}
+
+/* Alternate layout: Image on right for specific sections */
+section:nth-of-type(even) {
+    flex-direction: row-reverse;
+}
+
+.foto_sistem_kiri, .foto_sistem_kanan {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+}
+
+.ya, .ya2 {
+    flex: 1;
+}
+
+h2 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+h5 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    color: #5f6368;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #3c4043;
+    margin-bottom: 25px;
+}
+
+button {
+    padding: 12px 25px;
+    background-color: var(--dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+button:hover {
+    background-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* --- Responsive Media Queries --- */
+
+/* Tablet View */
+@media (max-width: 768px) {
+    section:not(#Picturess) {
+        flex-direction: column !important; /* Stack image on top of text */
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .foto_sistem_kiri, .foto_sistem_kanan {
+        max-width: 200px;
+    }
+
+    h2 { font-size: 2rem; }
+}
+
+/* iPhone SE / Mobile View */
+@media (max-width: 400px) {
+    .navbar .logo a { font-size: 0.9rem; }
+    
+    .row {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tiny screens */
+        gap: 10px;
+    }
+    
+    .card { padding: 10px; }
+    .card img { width: 50px; height: 50px; }
+    .card h2 a { font-size: 0.9rem; }
+}

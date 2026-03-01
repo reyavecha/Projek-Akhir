@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>25 Agustus 2025</title>
+    <style>
+        /* CSS Reset and Body Setup */
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f0f0; /* Added a background color for contrast */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ensures it takes up the full screen height */
+        }
+        
+        /* Calculator Container */
+        .calculator {
+            background-color: rgb(40, 38, 41);
+            width: 100%;
+            max-width: 320px; /* Limits size on large screens */
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            padding-bottom: 20px;
+        }
+        
+        h3 {
+            color: white;
+            padding: 20px 20px 0;
+            margin: 0;
+        }
+        
+        /* Input Screen */
+        input[type="text"], [id="result"] {
+            width: calc(100% - 40px); /* Accounts for padding */
+            height: 60px;
+            margin: 20px;
+            padding: 10px;
+            border: none;
+            box-sizing: border-box;
+            background-color: rgb(25, 24, 26); /* Darker screen for contrast */
+            border-radius: 6px;
+            color: rgb(255, 255, 255);
+            text-align: right;
+            font-size: 28px;
+        }
+        
+        /* Button Grid Layout */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+            gap: 10px; /* Space between buttons */
+            padding: 0 20px;
+        }
+        
+        /* Button Styles */
+        button {
+            width: 100%;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            color: white;
+            background-color: rgb(3, 134, 138);
+        }
+
+        /* Specific Button Colors */
+        .operator, .nothing, .clear {
+            color: white;
+            background-color: rgba(0, 0, 0, 0.648);
+        }
+
+        .number, .noth, .decimal {
+            color: white;
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="calculator">
+        <h3>Standard</h3>
+        <input type="text" id="result" readonly>
+        <div class="buttons">
+            <button class="nothing">%</button>
+            <button class="nothing">CE</button>
+            <button class="clear">C</button>
+            <button class="operator">/</button>
+
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">*</button>
+
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">-</button>
+
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="operator">+</button>
+
+            <button class="noth">+/-</button>
+            <button class="number">0</button>
+            <button class="decimal">.</button>
+            <button class="operator">=</button>
+        </div>
+    </div>
+
+    <script>
+        const buttonEL = document.querySelectorAll("button");
+        const inputFieldEL = document.getElementById("result");
+
+        for(let i = 0; i < buttonEL.length; i++){
+            buttonEL[i].addEventListener("click", () =>{
+                const buttonValue = buttonEL[i].textContent;
+                
+                // Note: Adding rudimentary checks to prevent % and +/- from breaking eval
+                if(buttonValue === "C" || buttonValue === "CE"){
+                    clearResult();
+                } else if(buttonValue === "="){
+                    calculateResult();
+                } else if (buttonValue !== "+/-" && buttonValue !== "%") {
+                    appendValue(buttonValue);
+                }
+            })
+        }
+        function clearResult(){
+            inputFieldEL.value = "";
+        }
+
+        function calculateResult(){
+            try {
+                // eval can throw errors if the equation is incomplete (e.g., "5+")
+                inputFieldEL.value = eval(inputFieldEL.value);
+            } catch (error) {
+                inputFieldEL.value = "Error";
+                setTimeout(clearResult, 1500); // Clear error after 1.5 seconds
+            }
+        }
+        
+        function appendValue(buttonValue){
+            // Prevent duplicate decimals or operators causing issues if desired
+            inputFieldEL.value += buttonValue;
+        }
+    </script>
+</body>
+</html>

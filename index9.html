@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8 September 2025</title>
+</head>
+<body>
+    <h1>Rumah sakit Indonesia Raya</h1>
+    <div class="all">
+     <div class="satu">
+       <h3>Counter 1</h3>
+       <p id="number">D0</p>
+       <button id="minus" onclick="kurang()"> - </button>
+       <button id="reset" onclick="reset()">Reset</button>
+       <button id="plus" onclick="tambah()"> + </button>
+     </div>
+      <div class="satu">
+         <h3>Counter 2</h3>
+         <p id="number2">A0</p>
+         <button id="minus2" onclick="kurang2()"> - </button>
+         <button id="reset2" onclick="reset2()">Reset</button>
+         <button id="plus2" onclick="tambah2()"> + </button>
+      </div>
+    </div>
+    <style>
+        body{
+            font-style: italic;
+            padding: 0;
+            margin: 0;
+            /* display: flex; */
+        }
+        .all {
+            display: flex;
+        }
+        h1{
+            padding-left: 20pt;
+            justify-self: center;
+        }
+        h3{
+            font-size: 20pt;
+        }
+        p {
+            font-size: 50pt;
+            font: bold;
+        }
+        .satu  {
+          background-color: #C1efed;
+          width: 40vw;
+          height: 70vh;
+          margin-left: 80px;
+          justify-items: center;
+          border-radius: 20px;
+          box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.317);
+          margin-top:  60px;
+        }
+        button {
+            justify-self: center;
+            
+        }
+        #plus, #plus2{
+            background-color: green;
+            height: 10vh;
+            width: 5vw;
+            color: white;
+            font-size: 40px;
+            border: 0;
+            border-radius: 10px;
+            margin-top: -20px;
+            margin-left: 10px;
+        }
+        #minus, #minus2 {
+            background-color: rgb(255, 0, 0);
+            height: 10vh;
+            width: 5vw;
+            color: white;
+            font-size: 40px;
+            border: 0;
+            border-radius: 10px;
+            /* margin-bottom: 20px; */
+            margin-left: 80px;
+        }
+        #reset, #reset2 {
+            background-color: rgb(78, 73, 73);
+            height: 10vh;
+            width: 15vw;
+            color: white;
+            font-size: 30px;
+            padding-top: 8px;
+            border: 0;
+            border-radius: 10px;
+            margin-left: 5px;
+            margin-top: -25px;
+            /* margin-bottom: -10px; */
+        }
+    </style>
+    <script>
+        // let variable = D;
+        let number = 0;
+
+        function ubahTampilan(){
+            document.getElementById('number').textContent = `D${number}`;
+            document.getElementById('plus').disabled = number === 10;
+            document.getElementById('minus').disabled = number === 0;
+            // document.getElementById('reset').
+        }
+
+        function tambah(){
+            if(number < 10){
+            number++;
+            ubahTampilan()
+            }
+            // else if (number = 10){
+                // document.getElementById('tambah').disabled = true;
+            // }
+        }
+        // function kurang(){
+            // number--;
+            // ubahTampilan()
+        // }
+        function kurang(){
+            if(number > 0){
+               number--;
+               ubahTampilan()
+            }
+        }
+        function reset(){
+            number = 0;
+            ubahTampilan();
+        }
+//
+
+ let number2 = 0;
+         function ubahTampilan2(){
+             document.getElementById('number2').textContent = `A${number}`;
+             document.getElementById('plus2').disabled = number === 10;
+          document.getElementById('minus2').disabled = number === 0;
+        }
+
+         function tambah2(){
+             if(number < 10){
+             number++;
+             ubahTampilan2()
+             }
+         }
+         function kurang2(){
+             if(number > 0){
+                number--;
+                ubahTampilan2()
+             }
+          }
+        function reset2(){
+            number = 0;
+            ubahTampilan2();
+         }
+    </script>
+</body>
+</html>

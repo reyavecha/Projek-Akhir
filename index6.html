@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Animasi</title>
+    <style>
+       *{
+        margin: 0;
+        padding: 0;
+       }
+       body{
+        background-color: antiquewhite;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        overflow-x: hidden;
+       }
+       h1{
+        margin: 10px;
+       }
+       .box{
+        background-color: rgb(68, 125, 145);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+        height: 30vh;
+        border-radius: 10px;
+        box-shadow: 2px 4px 5px rgb(123, 120, 120);
+        transform: translateX(400%);
+        transition: transform 0.4s ease;
+        margin: 10px;
+       }
+       .box:nth-of-type(even){
+        transform: translateX(-400%);
+       }
+       .box.show{
+        transform: translateX(0);
+       }
+       .box h2{
+        font-size: 45px;
+       }
+       @media (max-width:667px) {
+        h1{
+            width: 100%;
+            height: 5vh;
+            font-size: 23px;
+            margin-right: -20px;
+        }
+        .box{
+            width: 90%;
+            height: 30vh;
+            margin-right: 12px;
+            transform: translateX(-150%);
+            transition: transform 0.4s ease;
+            /* transform: translateY(400%) */
+            /* flex-wrap: wrap; */
+        }
+        .box:nth-of-type(even){
+        transform: translateX(-150%);
+        /* transform: translateY(-400%) */
+        }
+        .box.show{
+        transform: translateX(0);
+        /* transform: translateY(0) */
+        }
+       }
+    </style>
+</head>
+<body>
+    <h1>Scroll untuk melihat animasi</h1>
+    <div class="box"><h2>Januari</h2></div>
+    <div class="box"><h2>February</h2></div>
+    <div class="box"><h2>Maret<h2></div>
+    <div class="box"><h2>April</h2></div>
+    <div class="box"><h2>Mei</h2></div>
+    <div class="box"><h2>Juni</h2></div>
+    <div class="box"><h2>Juli</h2></div>
+    <div class="box"><h2>Agustus</h2></div>
+    <div class="box"><h2>September</h2></div>
+    <div class="box"><h2>October</h2></div>
+    <div class="box"><h2>November</h2></div>
+    <div class="box"><h2>December</h2></div>
+    <div class="box"><h2>Ember</h2></div>
+    <div class="box"><h2>Hari Selasa</h2></div>
+    <div class="box"><h2>Coding</h2></div>
+
+    <script>
+        const boxes = document.querySelectorAll('.box');
+
+        window.addEventListener('scroll',checkBoxes)
+
+        checkBoxes()
+
+        function checkBoxes(){
+            const triggerButton = window.innerHeight / 5 * 4
+
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top
+
+                if(boxTop < triggerButton){
+                    box.classList.add('show')
+                }else{
+                    box.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</body>
+</html>

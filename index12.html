@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tebak Angka</title>
+    <style>
+        /* Base Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9ecef; /* Soft gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Main Game Card */
+        .container {
+            background-color: white;
+            width: 90%;
+            max-width: 400px; /* Limits width on large screens */
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Input Field */
+        input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16pt;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 14pt;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+            margin-bottom: 15px;
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background-color: #cccccc !important;
+            cursor: not-allowed;
+        }
+
+        #tebak {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+
+        #tebak:hover:not(:disabled) {
+            background-color: #45a049;
+        }
+
+        #ulang {
+            background-color: #f44336; /* Red */
+            color: white;
+        }
+
+        #ulang:hover {
+            background-color: #da190b;
+        }
+
+        /* Results Area */
+        .special {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .special p {
+            margin: 0 0 10px 0;
+            color: #666;
+            font-size: 12pt;
+        }
+
+        #hasil {
+            font-weight: bold;
+            font-size: 14pt;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h2>Tebak Angka (1 - 10)</h2>
+        
+        <div class="ppp">
+            <input type="number" id="angka" placeholder="Masukkan angka..." min="1" max="10">
+        </div>
+        
+        <div class="tombol">
+            <button onclick="tebak()" id="tebak">Tebak</button>
+        </div>
+        
+        <div class="restart">
+            <button onclick="ulang()" id="ulang">Ulang</button>
+        </div>
+        
+        <div class="special">
+            <p>Hasil:</p>
+            <span id="hasil">-</span>
+        </div>
+    </div>
+
+    <script>
+        // Generate initial random number
+        let komputer = Math.floor(Math.random() * 10) + 1;
+
+        function tebak() {
+            let inputElement = document.getElementById('angka');
+            let hasilElement = document.getElementById('hasil');
+            let tebakBtn = document.getElementById('tebak');
+            
+            // Prevent empty guesses
+            if (inputElement.value === "") {
+                hasilElement.innerHTML = "Masukkan angka terlebih dahulu!";
+                hasilElement.style.color = "orange";
+                return;
+            }
+
+            let angka = parseFloat(inputElement.value);
+
+            if (komputer === angka) {
+                hasilElement.innerHTML = `Kamu berhasil menebak angkanya! : ${komputer}`;
+                hasilElement.style.color = "green";
+                tebakBtn.disabled = true; // Disable guess button on win
+            } else if (komputer < angka) {
+                hasilElement.innerHTML = `Angka yang ditebak terlalu besar`;
+                hasilElement.style.color = "red";
+            } else {
+                hasilElement.innerHTML = `Angka yang ditebak terlalu kecil`;
+                hasilElement.style.color = "red";
+            }
+        }
+
+        // New function to handle restarting the game properly
+        function ulang() {
+            // Generate a new number
+            komputer = Math.floor(Math.random() * 10) + 1;
+            
+            // Clear input and results
+            document.getElementById('angka').value = '';
+            document.getElementById('hasil').innerHTML = '-';
+            document.getElementById('hasil').style.color = "#333"; // Reset color
+            
+            // Re-enable the guess button
+            document.getElementById('tebak').disabled = false;
+        }
+    </script>
+</body>
+</html>

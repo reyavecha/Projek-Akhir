@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scribble Pro | Drawing App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #121212;
+            --panel-bg: rgba(30, 30, 30, 0.8);
+            --accent: #4facfe;
+            --danger: #ff4b2b;
+            --success: #00c851;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: #2c2c2c;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Top Navbar */
+        .navbar {
+            background-color: var(--bg-dark);
+            height: 50px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .navbar h4 {
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+        }
+
+        .navbar h4:hover { color: white; }
+
+        /* Main Workspace */
+        .workspace {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        canvas {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            cursor: crosshair;
+            max-width: 100%;
+            touch-action: none; /* Prevents scrolling while drawing on mobile */
+        }
+
+        /* Toolbox Container */
+        .toolbox {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .tool-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        .btn:active { transform: scale(0.9); }
+
+        #decrease { background-color: var(--danger); }
+        #increase { background-color: var(--success); }
+        #clear { background-color: #555; margin-left: 10px; }
+
+        #size {
+            font-weight: 600;
+            min-width: 25px;
+            text-align: center;
+        }
+
+        input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            background: none;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .navbar { display: none; }
+            .toolbox {
+                bottom: 20px;
+                padding: 10px 15px;
+                width: 90%;
+                justify-content: space-between;
+                border-radius: 15px;
+            }
+            .workspace { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <h4 style="color: var(--accent); font-weight: bold;">DRAWING APP</h4>
+        <h4>File</h4>
+        <h4>Edit</h4>
+        <h4>View</h4>
+    </div>
+
+    <div class="workspace">
+        <canvas id="canvas"></canvas>
+
+        <div class="toolbox">
+            <div class="tool-group">
+                <button class="btn" id="decrease">−</button>
+                <span id="size">10</span>
+                <button class="btn" id="increase">+</button>
+            </div>
+
+            <div style="width: 1px; height: 24px; background: #444;"></div>
+
+            <input type="color" id="color">
+            
+            <button class="btn" id="clear" title="Clear Canvas">🗑️</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const increaseBtn = document.getElementById('increase');
+        const decreaseBtn = document.getElementById('decrease');
+        const sizeEl = document.getElementById('size');
+        const colorEl = document.getElementById('color');
+        const clearEl = document.getElementById('clear');
+
+        let size = 10;
+        let isPressed = false;
+        let color = 'black';
+        let x, y;
+
+        // Make canvas responsive
+        function resizeCanvas() {
+            // Set canvas resolution to match its displayed size
+            const rect = canvas.parentNode.getBoundingClientRect();
+            canvas.width = rect.width - 40;
+            canvas.height = window.innerHeight * 0.7;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Mouse Events
+        canvas.addEventListener('mousedown', (e) => {
+            isPressed = true;
+            x = e.offsetX;
+            y = e.offsetY;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isPressed = false;
+            x = undefined;
+            y = undefined;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if(isPressed){
+                const x2 = e.offsetX;
+                const y2 = e.offsetY;
+                drawCircle(x2, y2);
+                drawLine(x, y, x2, y2);
+                x = x2;
+                y = y2;
+            }
+        });
+
+        // Touch Events (Mobile Support)
+        canvas.addEventListener('touchstart', (e) => {
+            const touch = e.touches[0];
+            const rect = canvas.getBoundingClientRect();
+            isPressed = true;
+            x = touch.clientX - rect.left;
+            y = touch.clientY - rect.top;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if(isPressed){
+                const touch = e.touches[0];
+                const rect = canvas.getBoundingClientRect();
+                const x2 = touch.clientX - rect.left;
+                const y2 = touch.clientY - rect.top;
+                drawCircle(x2, y2);
+                drawLine(x, y, x2, y2);
+                x = x2;
+                y = y2;
+            }
+            e.preventDefault();
+        }, { passive: false });
+
+        function drawCircle(x,y){
+            ctx.beginPath();
+            ctx.arc(x, y, size, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
+        function drawLine(x,y,x2,y2){
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = size * 2;
+            ctx.lineCap = 'round'; // Smoother lines
+            ctx.lineJoin = 'round';
+            ctx.stroke();
+        }
+
+        function updateSizeOnScreen(){
+            sizeEl.innerText = size;
+        }
+
+        increaseBtn.addEventListener('click', ()=>{
+            size = Math.min(size + 5, 50); // Max cap at 50
+            updateSizeOnScreen();
+        });
+
+        decreaseBtn.addEventListener('click', ()=>{
+            size = Math.max(size - 5, 5); // Min cap at 5
+            updateSizeOnScreen();
+        });
+
+        colorEl.addEventListener('input', (e) => color = e.target.value);
+        
+        clearEl.addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    </script>
+</body>
+</html>

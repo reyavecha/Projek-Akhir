@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Crossword - Rayner Junio Gunawan</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --danger: #d93025;
+            --dark: #202124;
+            --bg: #f8f9fa;
+            --cell-bg: #ffffff;
+            --unused: #202124;
+            /* Grid sizing optimized for 320px+ screens */
+            --grid-max: 420px;
+            --cell-size: calc(min(88vw, var(--grid-max)) / 10);
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 15px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--dark);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 1.4rem;
+            margin: 0;
+            color: var(--dark);
+            letter-spacing: 0.5px;
+        }
+
+        .author {
+            font-size: 0.8rem;
+            color: #5f6368;
+            margin-top: 4px;
+        }
+
+        /* Grid Container */
+        .crossword-wrapper {
+            background: var(--unused);
+            padding: 3px;
+            border-radius: 4px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(10, var(--cell-size));
+            grid-template-rows: repeat(10, var(--cell-size));
+            gap: 1.5px; /* Thin clean lines */
+        }
+
+        .cell {
+            position: relative;
+            background-color: var(--cell-bg);
+            width: var(--cell-size);
+            height: var(--cell-size);
+        }
+
+        .cell.unused {
+            background-color: var(--unused);
+        }
+
+        .cell input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            text-align: center;
+            font-size: calc(var(--cell-size) * 0.55);
+            font-weight: 700;
+            text-transform: uppercase;
+            outline: none;
+            background: transparent;
+            color: var(--dark);
+        }
+
+        .cell input:focus {
+            background-color: #e8f0fe;
+        }
+
+        .cell .num {
+            position: absolute;
+            top: 1px;
+            left: 2px;
+            font-size: calc(var(--cell-size) * 0.25);
+            font-weight: 700;
+            color: #3c4043;
+            pointer-events: none;
+        }
+
+        /* Controls Section */
+        .controls {
+            display: flex;
+            gap: 10px;
+            width: 90%;
+            max-width: var(--grid-max);
+            margin-bottom: 25px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 5px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn-clear { background-color: #e0e0e0; color: #3c4043; }
+        .btn-ans { background-color: var(--primary); color: white; }
+        button:active { opacity: 0.7; }
+
+        #answer-key {
+            display: none;
+            width: 90%;
+            max-width: var(--grid-max);
+            background: #e6f4ea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            border: 1px solid #ceead6;
+        }
+
+        /* Clues Section */
+        .clues-card {
+            width: 90%;
+            max-width: var(--grid-max);
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .clues-card h2 {
+            font-size: 1rem;
+            margin: 0 0 15px 0;
+            text-transform: uppercase;
+            color: var(--primary);
+            border-bottom: 1px solid #eee;
+            padding-bottom: 8px;
+        }
+
+        .clue-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .clue-list li {
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f9fa;
+            line-height: 1.4;
+        }
+
+        .clue-list b { color: var(--primary); margin-right: 6px; }
+
+        /* iPhone SE Specific Font Tweak */
+        @media (max-width: 330px) {
+            h1 { font-size: 1.1rem; }
+            .clue-list li { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>CROSSWORD PUZZLE</h1>
+        <div class="author">By Rayner Junio Gunawan 7G</div>
+    </header>
+
+    <div class="crossword-wrapper">
+        <div class="grid">
+            <div class="cell unused"></div>
+            <div class="cell"><span class="num">1</span><input type="text" maxlength="1"></div>
+            <div class="cell"><span class="num">2</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><span class="num">3</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell unused"></div>
+            <div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell unused"></div>
+            <div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div>
+
+            <div class="cell"><span class="num">4</span><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div>
+            <div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div>
+            <div class="cell"><span class="num">5</span><input type="text" maxlength="1"></div>
+            <div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell"><span class="num">6</span><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><span class="num">7</span><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell"><span class="num">8</span><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell"><span class="num">9</span><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell"><input type="text" maxlength="1"></div><div class="cell unused"></div>
+
+            <div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div><div class="cell unused"></div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-clear" onclick="clearGrid()">CLEAR ALL</button>
+        <button class="btn-ans" onclick="toggleAnswers()">ANSWERS</button>
+    </div>
+
+    <div id="answer-key">
+        <b>Answer Key:</b><br>
+        1. CONCERT, 2. OUTCOME, 3. CRAFT, 4. BATMAN, 5. ECHO, 6. TORCH, 7. ROUND, 8. PEN, 9. BIRTHDAY
+    </div>
+
+    <div class="clues-card">
+        <h2>Clues</h2>
+        <ul class="clue-list">
+            <li><b>1.</b> A Music Show (Across)</li>
+            <li><b>2.</b> Alternate for Result (Down)</li>
+            <li><b>3.</b> Creative Work (Down)</li>
+            <li><b>4.</b> Dark Knight (Across)</li>
+            <li><b>5.</b> You Get What You Give (Down)</li>
+            <li><b>6.</b> Used in Dark (Across)</li>
+            <li><b>7.</b> No Corners (Down)</li>
+            <li><b>8.</b> Mightier than Sword (Across)</li>
+            <li><b>9.</b> Once in a Year (Across)</li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleAnswers() {
+            const key = document.getElementById('answer-key');
+            key.style.display = (key.style.display === 'block') ? 'none' : 'block';
+        }
+
+        function clearGrid() {
+            if(confirm("Clear the entire puzzle?")) {
+                document.querySelectorAll('input').forEach(input => input.value = "");
+            }
+        }
+
+        // Automatic focus move to help mobile users
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', (e) => {
+                if (e.target.value.length === 1 && inputs[index + 1]) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

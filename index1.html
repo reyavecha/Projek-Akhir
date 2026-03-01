@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Master Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            --success: #10b981;
+            --danger: #ef4444;
+            --text-main: #1f2937;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+            color: var(--text-main);
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+            margin: 0;
+        }
+
+        .title-section p {
+            color: #6b7280;
+            margin-top: 8px;
+        }
+
+        .bungkus {
+            background-color: var(--card-bg);
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input Styling */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        /* Button Styling */
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.1s active;
+        }
+
+        button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        /* Table Styling */
+        .TTR {
+            margin-top: 32px;
+            overflow-x: auto;
+            border-radius: 12px;
+            border: 1px solid #f3f4f6;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th {
+            background-color: #f9fafb;
+            padding: 14px;
+            text-align: left;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #6b7280;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #f3f4f6;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Badges */
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-lulus {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-gagal {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Average Box */
+        .rata-rata {
+            margin-top: 24px;
+            padding: 16px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-color);
+            border: 1px dashed #cbd5e1;
+        }
+
+        /* Responsive */
+        @media (max-width: 667px) {
+            .bungkus { padding: 20px; }
+            .title-section h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="title-section">
+            <h2>Manajemen Nilai</h2>
+            <p>Input data siswa untuk kalkulasi otomatis</p>
+        </div>
+
+        <div class="bungkus">
+            <div class="form-group">
+                <input type="text" id="nama" placeholder="Nama Lengkap Siswa">
+                <input type="number" id="nilai" placeholder="Nilai Akademik (0-100)">
+                <input type="number" id="kehadiran" placeholder="Persentase Kehadiran (%)">
+                <button onclick="tambahSiswa()">Tambah ke Daftar</button>
+            </div>
+
+            <div class="TTR">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>Nilai</th>
+                            <th>Hadir</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelSiswa">
+                        </tbody>
+                </table>
+            </div>
+
+            <div id="ratarata"></div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Load data from LocalStorage immediately on script run
+let daftarSiswa = JSON.parse(localStorage.getItem('data_siswa')) || [];
+
+// 2. Run these when the page finishes loading
+window.onload = () => {
+    tampilkanSiswa();
+    hitungRataRata();
+    registerServiceWorker();
+};
+
+function tambahSiswa() {
+    const nama = document.getElementById('nama').value;
+    const nilai = parseFloat(document.getElementById('nilai').value);
+    const kehadiran = parseFloat(document.getElementById('kehadiran').value);
+
+    if (nama === "" || isNaN(nilai) || isNaN(kehadiran)) {
+        alert('Silakan lengkapi semua data.');
+        return;
+    }
+
+    if (nilai < 0 || nilai > 100 || kehadiran < 0 || kehadiran > 100) {
+        alert('Input harus berada di antara 0 sampai 100');
+        return;
+    }
+
+    let grade = (nilai >= 85) ? "A" : (nilai >= 75) ? "B" : (nilai >= 60) ? "C" : "D";
+    let status = (nilai >= 75 && kehadiran >= 80) ? "Lulus" : "Tidak Lulus";
+
+    const siswa = { nama, nilai, kehadiran, grade, status };
+    
+    // Add to array
+    daftarSiswa.push(siswa);
+    
+    // SAVE TO LOCAL STORAGE (This makes it offline-persistent)
+    localStorage.setItem('data_siswa', JSON.stringify(daftarSiswa));
+    
+    tampilkanSiswa();
+    hitungRataRata();
+
+    // Reset Form
+    document.getElementById('nama').value = "";
+    document.getElementById('nilai').value = "";
+    document.getElementById('kehadiran').value = "";
+}
+
+function tampilkanSiswa() {
+    const tabel = document.getElementById('tabelSiswa');
+    tabel.innerHTML = "";
+
+    daftarSiswa.forEach((siswa, index) => {
+        const statusClass = siswa.status === "Lulus" ? "status-lulus" : "status-gagal";
+        const row = `
+            <tr>
+                <td style="font-weight:500">${siswa.nama}</td>
+                <td>${siswa.nilai}</td>
+                <td>${siswa.kehadiran}%</td>
+                <td><strong>${siswa.grade}</strong></td>
+                <td><span class="badge ${statusClass}">${siswa.status}</span></td>
+            </tr>
+        `;
+        tabel.innerHTML += row;
+    });
+}
+
+function hitungRataRata() {
+    if (daftarSiswa.length === 0) {
+        document.getElementById('ratarata').innerHTML = "";
+        return;
+    };
+    let total = 0;
+    daftarSiswa.forEach(siswa => total += siswa.nilai);
+    const ratarata = total / daftarSiswa.length;
+    
+    document.getElementById('ratarata').innerHTML = `
+        <div class="rata-rata">
+            Rata-rata Nilai Kelas: <strong>${ratarata.toFixed(2)}</strong>
+        </div>
+    `;
+}
+
+// 3. Service Worker Registration
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+        .then(() => console.log("Offline Service Worker Registered"))
+        .catch(err => console.error("SW Registration Failed", err));
+    }
+}
+
+const CACHE_NAME = 'grade-master-v1';
+const ASSETS = [
+  './',
+  './index.html', // Change this if your file name is different
+  'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+];
+
+// Install Assets
+self.addEventListener('install', event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+  );
+});
+
+// Fetch Assets from Cache if Offline
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(response => {
+      return response || fetch(event.request);
+    })
+  );
+});
+    </script>
+</body>
+</html>

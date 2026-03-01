@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+      <div class="container">
+       <h2>Konversi Satuan Berat By Rayner</h2>
+       </div>
+       <div class="index">
+         <div class="number">
+        <p>Masukkan Angka</p>
+        <input id="b1" type="number" placeholder="masukkan angka">
+        </div>
+     <div class="ind1">
+        <p>Berat pertama :</p>
+        <select name="" id="awal">
+           <option value="kg">Kilogram</option>
+           <option value="hg">Hektogram</option>
+           <option value="dag">Dekagram</option>
+           <option value="g">Gram</option>
+           <option value="dg">Desigram</option>
+           <option value="cg">Centigram</option>
+           <option value="mg">Miligram</option>
+        </select>
+        <p>Konversi Berat Ke :</p>
+        <select name="" id="ke">
+           <option value="kg">Kilogram</option>
+           <option value="hg">Hektogram</option>
+           <option value="dag">Dekagram</option>
+           <option value="g">Gram</option>
+           <option value="dg">Desigram</option>
+           <option value="cg">Centigram</option>
+           <option value="mg">Miligram</option>
+        </select>
+         <button onclick="btn()">Hitung</button>
+         </div>
+         <div class="ind2">
+        <p>Hasil Konversi</p> <br> <h1 id="hasil"></h1>
+        </div>
+    <script>
+             function btn() { 
+             let berat1 = parseFloat(document.getElementById("b1").value);
+             let awal = document.getElementById("awal").value;
+             let ke = document.getElementById("ke").value;
+            
+            if(awal === 'kg'){
+             if(ke === 'hg'){
+                let jumlah = berat1 * 10 + " " + 'Hg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 * 100 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 * 1000 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                 let jumlah = berat1 * 10000 + " " + 'Dg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 * 100000 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 1000000+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+            if(awal === 'hg'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 10 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 * 10 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 * 100 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                 let jumlah = berat1 * 1000 + " " + 'Dg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 * 10000 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 100000+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'Hg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+            if(awal === 'dag'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 100 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'hg'){
+                 let jumlah = berat1 / 10 + " " + 'Hg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 * 10 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                 let jumlah = berat1 * 100 + " " + 'Dg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 * 1000 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 10000+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'Dag'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+            if(awal === 'g'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 1000 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'hg'){
+                 let jumlah = berat1 / 100 + " " + 'Hg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 / 10 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                 let jumlah = berat1 * 10 + " " + 'Dg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 * 100 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 1000+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'G'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+             if(awal === 'dg'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 10000 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'hg'){
+                 let jumlah = berat1 / 1000 + " " + 'Hg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 / 100 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 / 10 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 * 10 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 100+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'Dg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+            if(awal === 'cg'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 100000 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'hg'){
+                 let jumlah = berat1 / 10000 + " " + 'Hg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 / 1000 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 / 100 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                let jumlah = berat1 / 10 + " " + 'Dg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'mg'){
+                let jumlah = berat1 * 10+ " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+
+            if(awal === 'mg'){
+             if(ke === 'kg'){
+                let jumlah = berat1 / 1000000 + " " + 'Kg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'hg'){
+                 let jumlah = berat1 / 100000 + " " + 'Hg'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dag'){
+                 let jumlah = berat1 / 10000 + " " + 'Dag'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'g'){
+                 let jumlah = berat1 / 1000 + " " + 'G'
+                 document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'dg'){
+                let jumlah = berat1 / 100 + " " + 'Dg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else if (ke === 'cg'){
+                let jumlah = berat1 / 10 + " " + 'Cg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }else {
+                let jumlah = berat1  + " " + 'Mg'
+                document.getElementById('hasil').innerHTML = jumlah;
+             }
+            }
+        } 
+    </script>
+   </div>
+</body>
+</html>

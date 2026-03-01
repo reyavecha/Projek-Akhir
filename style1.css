@@ -1,0 +1,35 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.judul h1 {
+    text-align: center;
+}
+
+.sudoku-board {
+    display: grid;
+    grid-template-columns: repeat(3,120px);
+    grid-template-rows: repeat(3,120px);
+    gap: 3px;
+    background-color: black;
+    border: 3px solid black;
+}
+
+.block {
+    display: grid;
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+}
+
+.cell {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 100;
+    outline: none;
+}

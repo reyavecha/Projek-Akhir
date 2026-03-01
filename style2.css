@@ -1,0 +1,223 @@
+body{
+    background-color: black;
+    margin: 0px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: beige;
+}
+
+header{
+    color: #b1aa60;
+    font-size: 14pt;
+    text-align: center;
+}
+
+.periodic_table{
+    display: grid;
+    grid-template-rows: repeat(9,auto);
+    grid-template-columns: repeat(18,auto);
+    margin: auto;
+    width: 100vw;
+    grid-gap: 10px;
+    justify-content: center;
+}
+
+.nomor-massa-atom{
+  display: grid;
+  grid-template-columns: repeat(2,auto);
+  grid-gap: 20px;
+  justify-content: center;
+}
+
+.one{
+    background: linear-gradient(to bottom right, #f3f9a6 0%, #cbc634 100%);
+}
+
+.one .title, .one .desc {
+    background: -webkit-linear-gradient( #f3f9a6 0%, #cbc634 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+.two{
+    background: linear-gradient(to bottom right, #41ec83 0%, #f3d807 100%);
+}
+
+.two .title, .two .desc {
+    background: -webkit-linear-gradient(  #41ec83 0%, #36cb34 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.three{
+    background: linear-gradient(to bottom right, #e33535 0%, #f21010 100%);
+}
+
+.three .title, .three .desc {
+    background: -webkit-linear-gradient( #e33535 0%, #f21010 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.four{
+    background: linear-gradient(to bottom right, #ff9900 0%, #ec9d27 100%);
+}
+
+.four .title, .four .desc {
+    background: -webkit-linear-gradient( #ff9900 0%, #ec9d27 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.five{
+    background: linear-gradient(to bottom right, #c8c32b 0%, #f3d807 100%);
+}
+
+.five .title, .five .desc {
+    background: -webkit-linear-gradient( #c8c32b 0%, #f3d807 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.six{
+    background: linear-gradient(to bottom right, #41ec83 0%, #f3d807 100%);
+}
+
+.six .title, .six .desc {
+    background: -webkit-linear-gradient(  #41ec83 0%, #36cb34 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.seven{
+    background: linear-gradient(to bottom right, #0ceaf1 0%, #08edf5 100%);
+}
+
+.seven .title, .seven .desc {
+    background: -webkit-linear-gradient( #0ceaf1 0%, #08edf5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eight{
+    background: linear-gradient(to bottom right, #0c2ef1 0%, #03269b 100%);
+}
+
+.eight .title, .eight .desc {
+    background: -webkit-linear-gradient( #0c2ef1 0%, #03269b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nine{
+    background: linear-gradient(to bottom right, #9917ad 0%, #e851ff 100%);
+}
+
+.nine .title, .nine .desc {
+    background: -webkit-linear-gradient( #9917ad 0%, #d508f5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ten{
+    background: linear-gradient(to bottom right, #054609 0%, #033001 100%);
+}
+
+.ten .title, .ten .desc {
+    background: -webkit-linear-gradient( #054609 0%, #075b04 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eleven{
+    background: linear-gradient(to bottom right, #f36ad3 0%, #c76fce 100%);
+}
+
+.eleven .title, .eleven .desc {
+    background: -webkit-linear-gradient( #f36ad3 0%, #c76fce 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.periodic-element:hover{
+    transform: scale(2.5);
+    z-index: 10;
+}
+
+.periodic-element:hover .periodic-element-inner{
+    background: transparent;
+}
+
+.periodic-element:hover .title, .periodic-element:hover .desc, .periodic-element:hover .na, .periodic-element:hover .ma{
+    -webkit-text-fill-color: #222222;
+}
+
+.periodic-element:hover:after {
+    top: 105px;
+    opacity: 1;
+}
+
+.periodic-element{
+    padding: 4px;
+    position: relative;
+    z-index: 1;
+    cursor: default;
+    transition: all 0.3s ease;
+}
+
+.periodic-element .periodic-element-inner{
+    background: #232323;
+    padding: 10px 15px;
+    width: calc(100% - 30px);
+    height: calc(100% - 20%);
+    transition: inherit;
+}
+
+.periodic-element .title{
+    font: 900 30px "Cambria" ,sans serif;
+    margin: 0.3em 0 0;
+    transition: 0.8s ease 600ms;
+    color: aqua;
+}
+
+.periodic-element .desc{
+    font: 700 15px "Cambria",sans serif;
+    margin-top: 0.2em;
+    color: azure;
+}
+
+.periodic-element .na{
+    font: 700 12px "Cambria",sans serif;
+    margin-top: 0.1em;
+    color: azure;
+}
+
+.periodic-element .ma{
+    font: 700 12px "Cambria",sans serif;
+    margin-top: 0.1em;
+    margin-left: 2;
+    color: azure;
+}
+
+.jarak89 {
+    height: 40px;
+}
+
+.jarak10 {
+    height: 40px;
+}
+
+.keterangan{
+    height: 95px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.keterangan .nama {
+    color: #000000;
+    font-size: 17pt;
+    font-weight: bold;
+    text-align: center;
+    padding: 10%;
+}

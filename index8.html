@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* Navbar */
+        .atas{
+            display: flex;
+        }
+        .atas h2{
+            margin-left: 20px;
+        }
+        .garis{
+           height: 4px;
+           width: 100%;
+           background-color: rgba(128, 128, 128, 0.299);
+        }
+        
+         /* Side Middle */
+        .sm {
+            /* background-color: maroon; */
+            width: 475px;
+            height: 475px;
+            /* margin-left: 910px; */
+            /* margin-bottom: -1000px; */
+            margin-right: 45px;
+            margin-top: -425px;
+            justify-self: center;
+            border-radius: 8px;
+            }
+        #sinopsis{
+            width: 38vw;
+            height: 54vh;
+            background-color: rgb(190, 187, 187);
+            color: black;
+            border-radius: 10px;
+        }
+        .sm span {
+            padding-top: 10px;
+            font-weight: bold;
+            font-size: 14pt;
+            /* margin-left: 15px; */
+        }
+        .sm p {
+            padding-top: 10px;
+            padding-left: 20px;
+            max-width: 430px;
+        }
+        .double{
+            display: flex;
+        }
+        #tonton{
+            background-color: maroon;
+            border-radius: 10px;
+            width: 10vw;
+            height: 6vh;
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
+        #download{
+            padding-left: 20px;
+            padding-top: 12px;
+        }
+
+        /* .sm h4 {
+            padding-top: 130px;
+        } */
+        /* .bs {
+             /* background-color: maroon; */
+            /* width: 415px;
+            height: 255px;
+            /* margin-left: 910px; */
+            /* margin-bottom: -1000px; */
+            /* margin-left: 25px;
+            margin-bottom: 155px; */
+            /* justify-self: center; */
+            /* border-radius: 8px;
+            background-color: gray; */ 
+            /* width: 90%; */
+        /* }
+        .sm button {
+            border: 0;
+            color: white;
+            width: 14vw;
+            height: 8vh;
+            border-radius: 8px;
+            text-align: center;
+            justify-self: center;
+            padding-top: 5px; */
+            /* margin-left: 15px; */
+            /* margin-top: 10px; */
+            /* margin-top: 20px; */
+            /* font-size: 15pt;
+            background-color: maroon;
+            display: relative;
+        } */
+        /* .sm p {
+            color: black;
+            padding-top: 20pt;
+            padding-left: 10pt;
+            max-width: 350px;
+        } */
+        /* .sm h4 {
+            color: black;
+        } */ 
+         
+        /* Side Right */
+        .sr {
+            background-color: maroon;
+            width: 305px;
+            height: 400px;
+            /* margin-left: 910px; */
+            /* margin-bottom: -1000px; */
+            margin-top: -470px;
+            border-radius: 8px;
+        }
+        img {
+            width: 24vw;
+            height: 100%;
+            border-radius: 8px;
+        }
+        .triple{
+            display: flex;
+        }
+        #ska{
+            background-color: maroon;
+            border-radius: 10px;
+            width: 10vw;
+            height: 5vh;
+            color: white;
+            text-align: center;
+            padding-top: 10px;
+            margin-top: 20px;
+        }
+        #tdk{
+            background-color: maroon;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            /* padding-left: 45px; */
+            width: 12vw;
+            height: 5vh;
+            margin-left: 20px;
+            padding-top: 10px;
+            
+        }
+        .sr button{
+            border: 0;
+            color: white;
+            width: 8vw;
+            height: 6vh;
+            border-radius: 8px;
+            text-align: center;
+            justify-self: center;
+            padding-top: 5px;
+            /* margin-left: 15px; */
+            margin-top: 10px;
+            /* margin-top: 20px; */
+            font-size: 15pt;
+            background-color: maroon;
+            display: relative;
+            /* display: flex; */
+            /* display: absolute; */
+        }
+        .TS button{
+            border: 0;
+            color: white;
+            width: 10vw;
+            height: 6vh;
+            border-radius: 8px;
+            text-align: center;
+            padding-top: 5px;
+            margin-left: 170px;
+            margin-top: -30px;
+            font-size: 15pt;
+            background-color: maroon;
+            /* display: absolute; */
+        }
+       
+        /* Side Left */
+        .sl{
+            background-color: maroon;
+            width: 305px;
+            height: 480px;
+            margin-left: 910px;
+            margin-top: -5px;
+            border-radius: 8px;
+        }
+        .sl h3{
+            color: white;
+            padding-top: 20px;
+            padding-left: 100px;
+            font-size: 15pt;
+        }
+        select {
+            border: 0;
+            width: 20vw;
+            height: 7vh;
+            border-radius: 8px;
+            text-align: center;
+            margin-left: 24px;
+            font-size: 15pt;
+        }
+        option {
+            width: 200vw;
+        }
+        .ph{
+            color: white;
+            padding-right: 20px;
+        }
+        h4{
+            color: white;
+            padding-left: 25px;
+        }
+        input {
+            border: 0;
+            width: 20vw;
+            height: 6vh;
+            border-radius: 8px;
+            text-align: center;
+            margin-left: 24px;
+            font-size: 15pt;
+        }
+        .sl p {
+            border: 0;
+            width: 20vw;
+            height: 5vh;
+            border-radius: 8px;
+            text-align: center;
+            padding-top: 5px;
+            margin-left: 24px;
+            font-size: 15pt;
+            background-color: white;
+        }
+        .sl button {
+            border: 0;
+            width: 20vw;
+            height: 7vh;
+            border-radius: 8px;
+            text-align: center;
+            padding-top: 5px;
+            margin-left: 24px;
+            /* margin-top: 20px; */
+            font-size: 15pt;
+            background-color: white;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="atas">
+        <h2>Theater</h2>
+        <h2>Tv Show</h2>
+        <h2>Movies</h2>
+        <h2>Videos</h2>
+    </div>
+    <div class="garis"></div>
+     
+    <div class="sl">
+        <h3>Pilih Film</h3>
+     <select name="" id="film">
+        <option value="">-- Daftar Film --</option>
+        <option value="film1">Baaghi 4</option>
+        <option value="film2">Exit 8</option>
+        <option value="film3">The Long Walk</option>
+        <option value="film4">Lintrik</option>
+        <option value="film5">Materialists</option>
+        <option value="film6">OPERATION HADAL</option>
+        <option value="film7">Perempuan Sial</option>
+        <option value="film8">Red Sonja</option>
+        <option value="film9">Siccin 8</option>
+        <option value="film10">Sukma</option>
+     </select>
+        <h4>Harga :</h4>
+        <p id="harga">0</p>
+        <h4>Jumlah Tiket :</h4>
+         <input type="number" id="j_tiket">
+         <h4>Jumlah Bayar :</h4>
+         <p><span id ="bayar">0</span></p>
+         <button onclick="hitung()">Bayar</button>
+    </div>
+    
+    <div class="sr">
+    <img src="" alt="" id="img">
+    <div class="triple">
+         <h3 id="ska">Suka</h3>
+         <h3 id ="tdk">Tidak Suka</h3>
+    </div>
+    </div>
+
+    <div class="sm">
+    <span id="judul">Judul Film</span>
+    <div class="double">
+         <h3 id="tonton">Tonton</h3>
+         <h3 id ="download">Download</h3>
+    </div>
+    <h3>Sinopsis</h3>
+        <p id="sinopsis"></p>
+    </div>
+   
+    <script>
+        let selectElement = document.getElementById('film');
+        let imgElement = document.getElementById('img');
+        // let hargaElement = document.getElementById('harga');
+        let j_tiket = document.getElementById('j_tiket').value;
+
+        selectElement.addEventListener("change", function(){
+            let selectValue = selectElement.value;
+
+            if(selectValue === "film1"){
+                imgElement.src = 'B4.jpg'
+                harga = 37000;
+                // hargaElement.innerHTML = 'Harga : Rp 35.000'
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+            }else  if(selectValue == "film2"){
+                imgElement.src = 'E8.jpg'
+                harga = 65000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 50.000'
+            }else if(selectValue == "film3"){
+                imgElement.src = 'TLW.jpg'
+                harga = 55000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 36.700'
+            }else if(selectValue == "film4"){
+                imgElement.src = 'LTK.jpg'
+                harga = 50000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film5"){
+                imgElement.src = 'MIS.png'
+                harga = 60000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film6"){
+                imgElement.src = 'OH.jpg'
+                harga = 70000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film7"){
+                imgElement.src = 'PPS.jpg'
+                harga = 45000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film8"){
+                imgElement.src = 'RS.jpg'
+                harga = 75000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film9"){
+                imgElement.src = 'S8.png'
+                harga = 52000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }else if(selectValue == "film10"){
+                imgElement.src = 'SKA.jpg'
+                harga = 47000;
+                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
+                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            }
+            const format = harga.toLocaleString('id-ID')
+            document.getElementById('harga').textContent = `Rp${format}`;
+            document.getElementById('sinopsis').textContent = sinopsis;
+        });
+        function hitung(){
+            let j_tiket = parseFloat(document.getElementById('j_tiket').value);
+            // let h_tiket = parseFloat(document.getElementById('harga').value);
+            let bayar = harga * j_tiket;
+            const format = bayar.toLocaleString('id-ID');
+            document.getElementById('bayar').textContent = `Rp${format}`;
+        }
+    </script>
+</body>
+</html>

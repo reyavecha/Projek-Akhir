@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30 Sep 2025</title>
+    <style>
+        .top {
+            background-color: red;
+            color: white;
+            justify-content: center;
+            text-align: center;
+            justify-self: center;
+            padding-top: 10px;
+            margin-top: -20px;
+            padding-bottom: 10px;
+            height: 10vh;
+            width: 100vw;
+            /* display: flex; */
+        }
+         
+        .bungkus {
+            display: flex;
+        }
+    
+     
+        .bungkusone {
+            height: 86vh;
+            width: 50vw;
+        }
+    
+        .bungkusone h3 {
+            padding-left: 80px;
+            padding-top: 30px;
+        }
+        img {
+            margin-left: 30px;
+            margin-top: 30px;
+        }
+         
+        .bungkustwo {
+            overflow-y:auto;
+            padding-left: 80px;
+            width: 50vw;
+            height: 86vh;
+        }
+    
+     
+        video {
+            /* height: 80vh; */
+            width: 70%;
+            margin-left: 80px;
+            /* display: flex; */
+            /* height: 50%; */
+        }
+    
+    
+        button#snap {
+            margin-top: 10px;
+            margin-left: 80px;
+            color: white;
+            background-color: red;
+            border-radius: 8px;
+            width: 8vw;
+            height: 5vh;
+            border: 0;
+        }
+     
+        @Media (max-width:667px){ 
+            .top {
+                width: 100%;
+                height: 5vh;
+                margin-right: 20px;
+            }
+            .top h2 {
+                padding-top: 10px;
+                margin-top: -1px;
+                font-size: 20px;
+            }
+            .bungkus {
+                flex-wrap: wrap;
+                width: 100%;
+            }
+            .bungkus h3 {
+                font-size: 14px;
+                padding-left: 55px;
+            }
+            .bungkusone {
+                width: 100%;
+                height: 50vh;
+            }
+            .bungkustwo {
+                width: 100%;
+                margin-left: -20px;
+            }
+            video {
+                width: 220px;
+                height: 160px;
+                margin-left: 52px;
+            }
+            img {
+                width: 220px;
+                height: 160px;
+                margin-left: -2px;
+            }
+            button#snap {
+                width: 20vw;
+                margin-left: 55px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+    <div class="top">
+            <h2>Fotobox Free Use by Rayner</h2>
+        </div>
+    <div class="bungkus">
+    <div class="bungkusone">
+        <h3>Smile for the camera | Chesssss</h3>
+        <video src="" id="video" autoplay></video>
+        <div class="tombol">
+         <button id="snap">Take Foto</button>
+        </div>
+    </div>
+    <div class="bungkustwo">
+        <canvas id="canvas" style="display: none;"></canvas>
+        <div class="foto" id="photos"></div>
+    </div>
+    </div>
+    </div>
+    <script>
+        const video = document.getElementById('video');
+        const snapButton = document.getElementById('snap');
+        const canvas = document.getElementById('canvas');
+        const photoDiv = document.getElementById('photos');
+        const context = canvas.getContext('2d');
+
+        navigator.mediaDevices.getUserMedia({video : true})
+         .then(stream => {
+             video.srcObject = stream;
+         })
+         .catch(err =>{
+            console.log('Tidak bisa akses kamera' ,err);
+         })
+
+        snapButton.addEventListener('click',()=>{
+          context.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const imgData = canvas.toDataURL('image/png');
+          const img = document.createElement('img');
+          img.src = imgData;
+          photoDiv.appendChild(img);
+        });
+        canvas.width = 220;
+        canvas.height = 180;
+    </script>
+</body>
+</html>

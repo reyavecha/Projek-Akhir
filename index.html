@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio</title>
+    <style>
+        :root {
+            --bg-main: #0a1128;
+            --bg-surface: #121e3d;
+            --text-primary: #ffffff;
+            --text-secondary: #94a3b8;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #1e293b;
+            --card-bg: #1e293b;
+            --progress-bg: #1e293b;
+        }
+
+        [data-theme="light"] {
+            --bg-main: #f8fafc;
+            --bg-surface: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            --card-bg: #f1f5f9;
+            --progress-bg: #e2e8f0;
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            transition: background-color 0.3s, 
+            color 0.3s; 
+        }
+        body { 
+            background-color: var(--bg-main); 
+            color: var(--text-primary); 
+            line-height: 1.6; overflow-x: hidden; 
+            width: 100%; 
+        }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+        }
+        ul { 
+            list-style: none; 
+        }
+        section { 
+            padding: 60px 0; 
+        }
+
+        /* Buttons & Badges */
+        .btn { 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            border: none; 
+            font-weight: 600; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 14px; 
+            white-space: nowrap; }
+        .btn-primary { background: var(--accent-color); color: white; }
+        .btn-primary:hover { background: var(--accent-hover); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); }
+        
+        .badge { color: #10b981; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 8px; margin-bottom: 20px; text-transform: lowercase; }
+        .badge::before { content: ''; width: 8px; height: 8px; background: #10b981; border-radius: 50%; }
+
+        /* Navbar & Mobile Menu */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; background: var(--bg-main); z-index: 1000; }
+        .logo { display: flex; align-items: center; font-size: 24px; font-weight: 700; gap: 10px; z-index: 1100; }
+        .logo-icon { width: 22px; height: 22px; background: var(--accent-color); border-radius: 5px; transform: skewX(-15deg); }
+        
+        /* Navigation Links Logic */
+        .nav-content { display: flex; align-items: center; gap: 25px; }
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a:hover { color: var(--accent-color); }
+        .nav-actions { display: flex; align-items: center; gap: 15px; }
+
+        /* Hamburger Icon */
+        .menu-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 1100; }
+        .menu-toggle span { width: 25px; height: 3px; background: var(--text-primary); border-radius: 2px; transition: 0.3s; }
+
+        /* Hero */
+        .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .hero h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; }
+        .hero p { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 30px; }
+        .hero-img { 
+            background: var(--card-bg); 
+            height: 480px; 
+            border-radius: 30px; 
+            border: 1px solid var(--border-color); 
+            width: 100%;
+            display: flex; /* NEW: Centers the image */
+            align-items: center;
+            justify-content: center;
+            overflow: hidden; /* NEW: Keeps image inside the rounded corners */
+        }
+        .hero-img img {
+            max-width: 100%; /* NEW: Shrink to fit horizontally */
+            max-height: 100%; /* NEW: Shrink to fit vertically */
+            object-fit: contain; /* NEW: Ensures full visibility */
+        }
+
+        /* Stats */
+        .stats-banner { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; padding: 60px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); text-align: center; }
+        .stat-item h2 { font-size: clamp(2.5rem, 4vw, 3.5rem); margin-bottom: 5px; }
+        .stat-item p { color: var(--text-secondary); font-size: 14px; max-width: 200px; margin: 0 auto; }
+
+        /* Skills */
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        .phone-mockup { background: var(--bg-surface); border: 10px solid var(--border-color); border-radius: 40px; padding: 30px; display: flex; flex-direction: column; justify-content: center; text-align: center; width: 100%; max-width: 320px; margin: 0 auto; }
+        .mockup-card { background: var(--accent-color); padding: 20px; border-radius: 15px; color: white; margin-bottom: 20px; }
+        
+        .progress-bar { margin-bottom: 25px; }
+        .progress-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+        .progress-track { width: 100%; height: 8px; background: var(--progress-bg); border-radius: 10px; }
+        .progress-fill { height: 100%; background: var(--accent-color); border-radius: 10px; }
+
+        /* Services */
+        .services-header { text-align: center; margin-bottom: 50px; }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .service-card { background: var(--bg-surface); padding: 30px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .icon-box { width: 50px; height: 50px; background: var(--accent-color); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+
+        /* Portfolio - Shrink to Fit Fix */
+        .portfolio-header { text-align: center; margin-bottom: 50px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .port-img-wrapper { width: 100%; aspect-ratio: 1/1; border-radius: 15px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 15px; background: var(--card-bg); display: flex; align-items: center; justify-content: center; }
+        .port-img-wrapper img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s ease; }
+        .port-img-wrapper:hover img { transform: scale(1.05); }
+
+        /* Blog */
+        .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; }
+        .blog-card .blog-img { width: 100%; height: 200px; background: var(--card-bg); border-radius: 15px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+        .blog-img { 
+            width: 100%; 
+            height: 220px; 
+            background: var(--card-bg); 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 10px;
+        }
+        .blog-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+
+        /* Contact */
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .contact-form { background: var(--bg-surface); padding: 30px; border-radius: 24px; border: 1px solid var(--border-color); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
+        input, textarea { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--border-color); background: transparent; color: var(--text-primary); outline: none; }
+
+        /* Footer */
+        footer { border-top: 1px solid var(--border-color); padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 40px; }
+
+        /* --- MOBILE RESPONSIVE (IPHONE SE & OTHERS) --- */
+        @media (max-width: 992px) {
+            .nav-content {
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh;
+                background: var(--bg-surface); flex-direction: column; justify-content: center;
+                transition: 0.4s; box-shadow: -10px 0 30px rgba(0,0,0,0.3); z-index: 1050;
+            }
+            .nav-content.active { right: 0; }
+            .nav-links { flex-direction: column; text-align: center; }
+            .menu-toggle { display: flex; }
+            
+            .hero, .skills-grid, .services-grid, .portfolio-grid, .blog-grid, .contact-layout, .footer-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-banner { grid-template-columns: 1fr; }
+            .hero { text-align: center; }
+            .badge { justify-content: center; }
+            .hero-img { height: 300px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        /* Specifically for tiny screens like iPhone SE */
+        @media (max-width: 375px) {
+            h1 { font-size: 2rem; }
+            section { padding: 40px 0; }
+            .btn { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav>
+        <div class="logo"><div class="logo-icon"></div> Amphoreus</div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
+
+        <div class="nav-content" id="nav-content">
+            <div class="nav-links">
+                <a href="#home">Home</a><a href="#">About</a><a href="#services">Services</a><a href="#portfolio">Portfolio</a><a href="#blog">Blog</a><a href="#contact">Contact</a><a href="#contact">Documentation</a>
+            </div>
+            <div class="nav-actions">
+                <button id="theme-toggle">☀️</button>
+                <button class="btn btn-outline">Sign In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div>
+            <div class="badge">Build Everything</div>
+            <h1>Unveiling My Professional Odyssey: Portfolio Highlights</h1>
+            <p>Dive into a curated collection of my finest work, showcasing expertise across various industries and technologies.</p>
+            <button class="btn btn-primary">Get Started 
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+        </div>
+        <div class="hero-img">
+            <img src="images/cogan.png" alt="">
+        </div>
+    </section>
+
+    <div class="stats-banner">
+        <div class="stat-item"><h2>4.86</h2><p>Out of 5 stars from 3896 reviews on Google platform</p></div>
+        <div class="stat-item"><h2>364</h2><p>Client testimonials received in the year 2021</p></div>
+        <div class="stat-item"><h2>45M+</h2><p>Revenue generated through new projects & marketing</p></div>
+    </div>
+
+    <section class="skills-grid">
+        <div class="phone-mockup">
+            <p style="font-size: 12px; color: var(--text-secondary); margin-bottom: 10px;">Payment Total</p>
+            <h2 style="font-size: 2.2rem; margin-bottom: 20px;">$ 978.81</h2>
+            <div class="mockup-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>**** 4242</span>
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="white"><circle cx="15" cy="12" r="7" fill-opacity="0.5"/><circle cx="9" cy="12" r="7" fill-opacity="0.8"/></svg>
+                </div>
+            </div>
+            <button class="btn btn-primary" style="border-radius: 30px; justify-content: center;">Tap to Pay</button>
+        </div>
+        <div>
+            <div class="badge">build everything</div>
+            <h2 style="font-size: 2.2rem; margin-bottom: 25px;">Build amazing websites and landing pages with ease</h2>
+            <div class="progress-bar">
+                <div class="progress-info"><span>UX Research and Testing</span><span>95%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-info"><span>Product Management</span><span>84%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width: 84%;"></div></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-info"><span>UI & Visual Design</span><span>90%</span></div>
+                <div class="progress-track"><div class="progress-fill" style="width: 90%;"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="services-header">
+            <div class="badge" style="justify-content: center;">our services</div>
+            <h2 style="font-size: 2.2rem;">Services designed to meet your business needs</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-box"><svg viewBox="0 0 24 24" width="24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                <h3>UX & Product Design</h3>
+                <p>Strategic design thinking to create products that people love to use daily.</p>
+                <a href="#" style="color: var(--accent-color); font-weight: 700; display: block; margin-top: 20px;">Get Started &rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-box"><svg viewBox="0 0 24 24" width="24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <h3>Performance Optimization</h3>
+                <p>Speed up your workflow and digital delivery times with our custom tools.</p>
+                <a href="#" style="color: var(--accent-color); font-weight: 700; display: block; margin-top: 20px;">Get Started &rarr;</a>
+            </div>
+            <div class="service-card">
+                <div class="icon-box"><svg viewBox="0 0 24 24" width="24" fill="white"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <h3>UI & Visual Design</h3>
+                <p>Creating pixel-perfect interfaces that reflect your brand identity perfectly.</p>
+                <a href="#" style="color: var(--accent-color); font-weight: 700; display: block; margin-top: 20px;">Get Started &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" >
+        <div class="portfolio-header">
+            <h2 style="font-size: 2.2rem;">Explore my portfolio showcase</h2>
+            <p style="color: var(--text-secondary);">Curated collection of my finest work across various industries.</p>
+        </div>
+        <div class="portfolio-grid">
+             <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/CekNilai.png" alt="Project 1"></div>
+                <a href="index1.html" style="font-weight: bold;">Cek Nilai Siswa</a><p style="color: var(--text-secondary); font-size: 14px;">Mengecek Nilai Siswa</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/LatihanForLoop.png" alt="Project 1"></div>
+                <a href="index2.html" style="font-weight: bold;">Latihan For Loop</a><p style="color: var(--text-secondary); font-size: 14px;">Latihan For Loop</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/DrawingApp.png" alt="Project 1"></div>
+                <a href="index3.html" style="font-weight: bold;">Drawing App</a><p style="color: var(--text-secondary); font-size: 14px;">Aplikasi untuk menggambar</p>
+                </p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/PasswordGenerator.png" alt="Project 1"></div>
+                <a href="index4.html" style="font-weight: bold;">Password Generator</a><p style="color: var(--text-secondary); font-size: 14px;">Membuat Password yang kuat</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/JavascriptQuiz.png" alt="Project 1"></div>
+                <a href="index5.html" style="font-weight: bold;">Javascript Quiz</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah quiz mengenai Javascript</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/AnimasiScroll.png" alt="Project 1"></div>
+                <a href="index6.html" style="font-weight: bold;">Animasi Scroll</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah website dengan animasi jika di scroll</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/Fotobox.png" alt="Project 1"></div>
+                <a href="index7.html" style="font-weight: bold;">Fotobox</a><p style="color: var(--text-secondary); font-size: 14px;">Fotobox Online Gratis</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/TiketFilm.png" alt="Project 1"></div>
+                <a href="index8.html" style="font-weight: bold;">Tiket Film</a><p style="color: var(--text-secondary); font-size: 14px;">Tempat online untuk memesan tiket film</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/HitungPasienRS.png" alt="Project 1"></div>
+                <a href="index9.html" style="font-weight: bold;">Hitung Pasien RS</a><p style="color: var(--text-secondary); font-size: 14px;">Menghitung jumlah pasien di rumah sakit</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/Kalkulator.png" alt="Project 1"></div>
+                <a href="index11.html" style="font-weight: bold;">Kalkulator</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah Kalkulator Online</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/Tebang.png" alt="Project 1"></div>
+                <a href="index12.html" style="font-weight: bold;">Tebak Angka</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah game tebak angka</p>
+            </div>
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/navbar.png" alt="Project 1"></div>
+                <a href="index13.html" style="font-weight: bold;">Latihan Animasi Navbar</a><p style="color: var(--text-secondary); font-size: 14px;">Latihan tentang Animasi Navbar</p>
+            </div>
+             <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/crssw.png" alt="Project 1"></div>
+                <a href="crossword.html" style="font-weight: bold;">Game Crossword</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah game crossword</p>
+            </div>
+             <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/su.png" alt="Project 1"></div>
+                <a href="Sudoku.html" style="font-weight: bold;">Game Sudoku</a><p style="color: var(--text-secondary); font-size: 14px;">Sebuah game sudoku</p>
+            </div>  
+             <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/per.png" alt="Project 1"></div>
+                <a href="tabelperiodik.html" style="font-weight: bold;">Tabel Periodik</a><p style="color: var(--text-secondary); font-size: 14px;">Website Tabel Periodik</p>
+            </div>  
+             <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/konversi.png" alt="Project 1"></div>
+                <a href="index10.html" style="font-weight: bold;">Konversi Satuan Berat</a><p style="color: var(--text-secondary); font-size: 14px;">Website Konversi Satuan Berat</p>
+            </div>  
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/sh.png" alt="Project 1"></div>
+                <a href="index14.html" style="font-weight: bold;">Konversi Suhu</a><p style="color: var(--text-secondary); font-size: 14px;">Website Konversi Suhu</p>
+            </div>         
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/WHK.png" alt="Project 1"></div>
+                <a href="index15.html" style="font-weight: bold;">Website Hardware Komputer</a><p style="color: var(--text-secondary); font-size: 14px;">Website Tentang Hardware Komputer</p>
+            </div>         
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/T.png" alt="Project 1"></div>
+                <a href="index16.html" style="font-weight: bold;">Website Todo List</a><p style="color: var(--text-secondary); font-size: 14px;">Website untuk menyatat list kegiatan yang akan kalian lakukan</p>
+            </div>         
+            <div class="portfolio-item">
+                <div class="port-img-wrapper"><img src="images/fc.png" alt="Project 1"></div>
+                <a href="flipcard.html" style="font-weight: bold;">Flip Card</a><p style="color: var(--text-secondary); font-size: 14px;">Website Flip Card</p>
+            </div>                    
+        </div>
+    </section>
+
+    <section class="testimonial">
+        <div style="width: 80px; height: 80px; background: var(--card-bg); border-radius: 50%; margin: 0 auto 25px; border: 1px solid var(--border-color);"></div>
+        <p style="font-size: 1.2rem; font-style: italic; max-width: 800px; margin: 0 auto 30px;">"Funfact: Dahulu, AI sangat buruk dalam mengenali kata ganti sederhana. Untuk waktu yang lama, kalimat seperti "Piala itu tidak muat di dalam koper cokelat karena terlalu besar" akan membuat AI kebingungan."</p>
+        <h4 style="color: var(--accent-color);">Rayner Junio Gunawan</h4>
+        <span style="font-size: 14px; color: var(--text-secondary); align-items: center; justify-content: center; text-align: center;">Website Owner, Amphoreus Inc</span>
+    </section>
+
+    <section id="blog">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <h2>Latest blog & news</h2>
+            <a href="#" style="color: var(--accent-color); font-weight: 600;">View More &rarr;</a>
+        </div>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-img">
+                    <img src="images/AM.png" alt="Blog 1">
+                </div>
+                <span class="blog-tag">Pricing</span>
+                <h3>Business from the brink of ruin by optimizing website</h3>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img">
+                    <img src="images/SWIT.png" alt="Blog 1">
+                </div>
+                <span class="blog-tag">Strategy</span>
+                <h3>The work is top-notch and I consistently outrank all</h3>
+            </div>
+            <div class="blog-card">
+                <div class="blog-img">
+                    <img src="images/PNCK.png" alt="Blog 1">
+                </div>
+                <span class="blog-tag">Marketing</span>
+                <h3>Grow my business through organic search and marketing</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-layout">
+        <div>
+            <div class="badge">build everything</div>
+            <h2 style="font-size: 2.2rem; margin-bottom: 30px;">Let's discuss about your project and take it the next level.</h2>
+            <p><strong>Phone:</strong> +08 3482-8964-29304</p>
+            <p><strong>Email:</strong> amphoreus@321.com</p>
+            <p><strong>Location:</strong> SMP IGS, Veteran, Palembang</p>
+        </div>
+        <div class="contact-form">
+            <h3 style="margin-bottom: 25px;">Start the project</h3>
+            <div class="form-row">
+                <input type="text" placeholder="First name">
+                <input type="text" placeholder="Last name">
+            </div>
+            <input type="email" placeholder="youremail@website.com" style="margin-bottom: 20px;">
+            <textarea rows="4" placeholder="Let us know about your project" style="margin-bottom: 20px;"></textarea>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;">Submit inquiry</button>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;"><div class="logo-icon"></div> Amphoreus</div>
+                <h2 style="font-size: 1.8rem;">Ready to get started?</h2>
+            </div>
+            <div class="footer-col">
+                <h4>Support</h4>
+                <p>Help Center</p>
+                <p>amphoreus@2133.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>Links</h4>
+                <ul><li>About Us</li><li>Services</li><li>Portfolio</li></ul>
+            </div>
+            <div class="footer-col">
+                <h4>Newsletter</h4>
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <input type="email" placeholder="Email*" style="margin: 0; padding: 10px;">
+                    <button class="btn btn-primary" style="padding: 10px;">&rarr;</button>
+                </div>
+            </div>
+        </div>
+        <p style="text-align: center; color: var(--text-secondary); font-size: 14px;">&copy; 2026 Amphoreus Portfolio. All rights reserved.</p>
+    </footer>
+</div>
+
+<script>
+    const themeBtn = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+    const menuToggle = document.getElementById('mobile-menu');
+    const navContent = document.getElementById('nav-content');
+
+    // Mobile Menu Toggle
+    menuToggle.addEventListener('click', () => {
+        navContent.classList.toggle('active');
+    });
+
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => navContent.classList.remove('active'));
+    });
+
+    const updateThemeUI = () => {
+        themeBtn.innerText = html.getAttribute('data-theme') === 'light' ? '🌙' : '☀️';
+    };
+
+    themeBtn.addEventListener('click', () => {
+        if (html.getAttribute('data-theme') === 'light') {
+            html.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            html.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+        }
+        updateThemeUI();
+    });
+
+    if (localStorage.getItem('theme') === 'light') {
+        html.setAttribute('data-theme', 'light');
+    }
+    updateThemeUI();
+</script>
+
+</body>
+</html>
