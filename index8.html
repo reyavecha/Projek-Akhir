@@ -3,376 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Modern Theater Ticketing</title>
     <style>
-        /* Navbar */
-        .atas{
-            display: flex;
-        }
-        .atas h2{
-            margin-left: 20px;
-        }
-        .garis{
-           height: 4px;
-           width: 100%;
-           background-color: rgba(128, 128, 128, 0.299);
-        }
-        
-         /* Side Middle */
-        .sm {
-            /* background-color: maroon; */
-            width: 475px;
-            height: 475px;
-            /* margin-left: 910px; */
-            /* margin-bottom: -1000px; */
-            margin-right: 45px;
-            margin-top: -425px;
-            justify-self: center;
-            border-radius: 8px;
-            }
-        #sinopsis{
-            width: 38vw;
-            height: 54vh;
-            background-color: rgb(190, 187, 187);
-            color: black;
-            border-radius: 10px;
-        }
-        .sm span {
-            padding-top: 10px;
-            font-weight: bold;
-            font-size: 14pt;
-            /* margin-left: 15px; */
-        }
-        .sm p {
-            padding-top: 10px;
-            padding-left: 20px;
-            max-width: 430px;
-        }
-        .double{
-            display: flex;
-        }
-        #tonton{
-            background-color: maroon;
-            border-radius: 10px;
-            width: 10vw;
-            height: 6vh;
-            color: white;
-            text-align: center;
-            padding-top: 10px;
-            margin-top: 20px;
-        }
-        #download{
-            padding-left: 20px;
-            padding-top: 12px;
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-color: #800000; /* Maroon */
+            --bg-color: #f4f4f9;
+            --card-bg: #ffffff;
+            --text-dark: #333;
+            --text-light: #ffffff;
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
         }
 
-        /* .sm h4 {
-            padding-top: 130px;
-        } */
-        /* .bs {
-             /* background-color: maroon; */
-            /* width: 415px;
-            height: 255px;
-            /* margin-left: 910px; */
-            /* margin-bottom: -1000px; */
-            /* margin-left: 25px;
-            margin-bottom: 155px; */
-            /* justify-self: center; */
-            /* border-radius: 8px;
-            background-color: gray; */ 
-            /* width: 90%; */
-        /* }
-        .sm button {
-            border: 0;
-            color: white;
-            width: 14vw;
-            height: 8vh;
-            border-radius: 8px;
-            text-align: center;
-            justify-self: center;
-            padding-top: 5px; */
-            /* margin-left: 15px; */
-            /* margin-top: 10px; */
-            /* margin-top: 20px; */
-            /* font-size: 15pt;
-            background-color: maroon;
-            display: relative;
-        } */
-        /* .sm p {
-            color: black;
-            padding-top: 20pt;
-            padding-left: 10pt;
-            max-width: 350px;
-        } */
-        /* .sm h4 {
-            color: black;
-        } */ 
-         
-        /* Side Right */
-        .sr {
-            background-color: maroon;
-            width: 305px;
-            height: 400px;
-            /* margin-left: 910px; */
-            /* margin-bottom: -1000px; */
-            margin-top: -470px;
-            border-radius: 8px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        img {
-            width: 24vw;
-            height: 100%;
-            border-radius: 8px;
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
         }
-        .triple{
+
+        /* --- Navbar --- */
+        .atas {
             display: flex;
+            justify-content: center;
+            background-color: var(--card-bg);
+            padding: 15px 0;
+            gap: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        #ska{
-            background-color: maroon;
-            border-radius: 10px;
-            width: 10vw;
-            height: 5vh;
-            color: white;
+
+        .atas h2 {
+            font-size: 1rem;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .atas h2:hover {
+            opacity: 0.7;
+        }
+
+        /* --- Main Layout Grid --- */
+        .main-container {
+            display: grid;
+            grid-template-columns: 300px 1fr 300px; /* Left, Middle, Right */
+            gap: 25px;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Common Card Style */
+        .card {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* --- Left Side: Booking Form --- */
+        .sl h3 {
             text-align: center;
-            padding-top: 10px;
-            margin-top: 20px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
         }
-        #tdk{
-            background-color: maroon;
-            border-radius: 10px;
-            text-align: center;
-            color: white;
-            /* padding-left: 45px; */
-            width: 12vw;
-            height: 5vh;
-            margin-left: 20px;
-            padding-top: 10px;
-            
+
+        .form-group {
+            margin-bottom: 15px;
         }
-        .sr button{
-            border: 0;
-            color: white;
-            width: 8vw;
-            height: 6vh;
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .display-box {
+            background: #f9f9f9;
+            padding: 10px;
             border-radius: 8px;
             text-align: center;
-            justify-self: center;
-            padding-top: 5px;
-            /* margin-left: 15px; */
-            margin-top: 10px;
-            /* margin-top: 20px; */
-            font-size: 15pt;
-            background-color: maroon;
-            display: relative;
-            /* display: flex; */
-            /* display: absolute; */
+            font-weight: bold;
+            border: 1px dashed var(--primary-color);
+            margin-bottom: 10px;
         }
-        .TS button{
-            border: 0;
+
+        .btn-bayar {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
             color: white;
-            width: 10vw;
-            height: 6vh;
+            border: none;
             border-radius: 8px;
-            text-align: center;
-            padding-top: 5px;
-            margin-left: 170px;
-            margin-top: -30px;
-            font-size: 15pt;
-            background-color: maroon;
-            /* display: absolute; */
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
         }
-       
-        /* Side Left */
-        .sl{
-            background-color: maroon;
-            width: 305px;
-            height: 480px;
-            margin-left: 910px;
-            margin-top: -5px;
+
+        .btn-bayar:hover {
+            background-color: #a00000;
+        }
+
+        /* --- Middle: Movie Info --- */
+        .sm #judul {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn-action {
+            padding: 10px 20px;
             border-radius: 8px;
-        }
-        .sl h3{
+            background: var(--primary-color);
             color: white;
-            padding-top: 20px;
-            padding-left: 100px;
-            font-size: 15pt;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
-        select {
-            border: 0;
-            width: 20vw;
-            height: 7vh;
+
+        .btn-action.outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        #sinopsis {
+            background: #eee;
+            padding: 15px;
             border-radius: 8px;
+            min-height: 150px;
+            font-size: 0.95rem;
+        }
+
+        /* --- Right Side: Poster --- */
+        .sr {
             text-align: center;
-            margin-left: 24px;
-            font-size: 15pt;
         }
-        option {
-            width: 200vw;
+
+        #img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            background-color: #ddd; /* Placeholder color */
+            margin-bottom: 15px;
         }
-        .ph{
+
+        .vote-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .vote-btn {
+            flex: 1;
+            padding: 10px;
+            background: var(--primary-color);
             color: white;
-            padding-right: 20px;
-        }
-        h4{
-            color: white;
-            padding-left: 25px;
-        }
-        input {
-            border: 0;
-            width: 20vw;
-            height: 6vh;
             border-radius: 8px;
-            text-align: center;
-            margin-left: 24px;
-            font-size: 15pt;
+            font-size: 0.8rem;
+            cursor: pointer;
         }
-        .sl p {
-            border: 0;
-            width: 20vw;
-            height: 5vh;
-            border-radius: 8px;
-            text-align: center;
-            padding-top: 5px;
-            margin-left: 24px;
-            font-size: 15pt;
-            background-color: white;
-        }
-        .sl button {
-            border: 0;
-            width: 20vw;
-            height: 7vh;
-            border-radius: 8px;
-            text-align: center;
-            padding-top: 5px;
-            margin-left: 24px;
-            /* margin-top: 20px; */
-            font-size: 15pt;
-            background-color: white;
-        }
+
+        /* --- RESPONSIVE BREAKPOINTS --- */
         
+        /* Tablet: 2 Columns */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr 1fr;
+            }
+            .sm {
+                grid-column: span 2;
+                order: -1; /* Movie Info moves to top */
+            }
+        }
+
+        /* Mobile (iPhone SE etc): 1 Column */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                margin-top: 10px;
+            }
+            .sm, .sl, .sr {
+                grid-column: span 1;
+            }
+            .atas {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            .atas h2 {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="atas">
+
+    <nav class="atas">
         <h2>Theater</h2>
         <h2>Tv Show</h2>
         <h2>Movies</h2>
         <h2>Videos</h2>
-    </div>
-    <div class="garis"></div>
-     
-    <div class="sl">
-        <h3>Pilih Film</h3>
-     <select name="" id="film">
-        <option value="">-- Daftar Film --</option>
-        <option value="film1">Baaghi 4</option>
-        <option value="film2">Exit 8</option>
-        <option value="film3">The Long Walk</option>
-        <option value="film4">Lintrik</option>
-        <option value="film5">Materialists</option>
-        <option value="film6">OPERATION HADAL</option>
-        <option value="film7">Perempuan Sial</option>
-        <option value="film8">Red Sonja</option>
-        <option value="film9">Siccin 8</option>
-        <option value="film10">Sukma</option>
-     </select>
-        <h4>Harga :</h4>
-        <p id="harga">0</p>
-        <h4>Jumlah Tiket :</h4>
-         <input type="number" id="j_tiket">
-         <h4>Jumlah Bayar :</h4>
-         <p><span id ="bayar">0</span></p>
-         <button onclick="hitung()">Bayar</button>
-    </div>
-    
-    <div class="sr">
-    <img src="" alt="" id="img">
-    <div class="triple">
-         <h3 id="ska">Suka</h3>
-         <h3 id ="tdk">Tidak Suka</h3>
-    </div>
-    </div>
+    </nav>
 
-    <div class="sm">
-    <span id="judul">Judul Film</span>
-    <div class="double">
-         <h3 id="tonton">Tonton</h3>
-         <h3 id ="download">Download</h3>
-    </div>
-    <h3>Sinopsis</h3>
-        <p id="sinopsis"></p>
-    </div>
-   
+    <main class="main-container">
+        
+        <section class="card sr">
+            <img src="placeholder.jpg" alt="Poster Film" id="img">
+            <div class="vote-buttons">
+                <div class="vote-btn">👍 Suka</div>
+                <div class="vote-btn">👎 Tidak Suka</div>
+            </div>
+        </section>
+
+        <section class="card sm">
+            <span id="judul">Pilih Film Anda</span>
+            <div class="action-buttons">
+                <a href="#" class="btn-action">Tonton</a>
+                <a href="#" class="btn-action outline">Download</a>
+            </div>
+            <h3>Sinopsis</h3>
+            <p id="sinopsis">Silahkan pilih film dari daftar untuk melihat detail.</p>
+        </section>
+
+        <section class="card sl">
+            <h3>Pesan Tiket</h3>
+            <div class="form-group">
+                <label>Pilih Film</label>
+                <select id="film">
+                    <option value="">-- Daftar Film --</option>
+                    <option value="film1">Baaghi 4</option>
+                    <option value="film2">Exit 8</option>
+                    <option value="film3">The Long Walk</option>
+                    <option value="film4">Lintrik</option>
+                    <option value="film5">Sukma</option>
+                    <option value="film6">OPERATION HADAL</option>
+                    <option value="film7">Perempuan Sial</option>
+                    <option value="film8">Red Sonja</option>
+                </select>
+            </div>
+
+            <label>Harga Satuan:</label>
+            <div class="display-box" id="harga">Rp 0</div>
+
+            <div class="form-group">
+                <label>Jumlah Tiket</label>
+                <input type="number" id="j_tiket" value="1" min="1">
+            </div>
+
+            <label>Total Bayar:</label>
+            <div class="display-box" id="bayar">Rp 0</div>
+
+            <button class="btn-bayar" onclick="hitung()">Bayar Sekarang</button>
+        </section>
+
+    </main>
+
     <script>
-        let selectElement = document.getElementById('film');
-        let imgElement = document.getElementById('img');
-        // let hargaElement = document.getElementById('harga');
-        let j_tiket = document.getElementById('j_tiket').value;
+        let hargaGlobal = 0; // Stores the current price globally
+
+        const selectElement = document.getElementById('film');
+        const imgElement = document.getElementById('img');
+        const judulElement = document.getElementById('judul');
+        const sinopsisElement = document.getElementById('sinopsis');
+        const hargaDisplay = document.getElementById('harga');
 
         selectElement.addEventListener("change", function(){
-            let selectValue = selectElement.value;
+            const selectValue = selectElement.value;
+            let sinopsisText = "";
+            let currentTitle = "";
 
-            if(selectValue === "film1"){
-                imgElement.src = 'B4.jpg'
-                harga = 37000;
-                // hargaElement.innerHTML = 'Harga : Rp 35.000'
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-            }else  if(selectValue == "film2"){
-                imgElement.src = 'E8.jpg'
-                harga = 65000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 50.000'
-            }else if(selectValue == "film3"){
-                imgElement.src = 'TLW.jpg'
-                harga = 55000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 36.700'
-            }else if(selectValue == "film4"){
-                imgElement.src = 'LTK.jpg'
-                harga = 50000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film5"){
-                imgElement.src = 'MIS.png'
-                harga = 60000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film6"){
-                imgElement.src = 'OH.jpg'
-                harga = 70000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film7"){
-                imgElement.src = 'PPS.jpg'
-                harga = 45000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film8"){
-                imgElement.src = 'RS.jpg'
-                harga = 75000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film9"){
-                imgElement.src = 'S8.png'
-                harga = 52000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
-            }else if(selectValue == "film10"){
-                imgElement.src = 'SKA.jpg'
-                harga = 47000;
-                sinopsis = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi, voluptatem repellendus ratione quia unde voluptate architecto voluptatibus exercitationem ipsam accusantium obcaecati doloremque corrupti in assumenda laudantium culpa et facere itaque!'
-                // hargaElement.innerHTML = 'Harga : Rp 42.500'
+            // Movie Data Logic
+            switch(selectValue) {
+                case "film1":
+                    imgElement.src = 'cinema/B4.jpg';
+                    hargaGlobal = 37000;
+                    currentTitle = "Baaghi 4";
+                    sinopsisText = "Aksi heroik Ronnie kembali dalam seri keempat yang penuh ledakan.";
+                    break;
+                case "film2":
+                    imgElement.src = 'cinema/E8.jpg';
+                    hargaGlobal = 65000;
+                    currentTitle = "Exit 8";
+                    sinopsisText = "Terjebak di lorong bawah tanah tanpa ujung. Bisakah kamu menemukan jalan keluar?";
+                    break;
+                case "film3":
+                    imgElement.src = 'cinema/TLW.jpg';
+                    hargaGlobal = 55000;
+                    currentTitle = "The Long Walk";
+                    sinopsisText = "Perjalanan spiritual yang mengharukan melintasi waktu dan kenangan.";
+                    break;
+                case "film4":
+                    imgElement.src = 'cinema/LTK.jpg';
+                    hargaGlobal = 50000;
+                    currentTitle = "Lintrik";
+                    sinopsisText = "Horor mencekam tentang rahasia gelap di balik ilmu hitam kuno.";
+                    break;
+                 case "film5":
+                    imgElement.src = 'cinema/SKA.jpg';
+                    hargaGlobal = 37000;
+                    currentTitle = "Sukma";
+                    sinopsisText = "Aksi heroik Ronnie kembali dalam seri keempat yang penuh ledakan.";
+                    break;
+                case "film6":
+                    imgElement.src = 'cinema/OH.jpg';
+                    hargaGlobal = 65000;
+                    currentTitle = "OPERATION HADAL";
+                    sinopsisText = "Terjebak di lorong bawah tanah tanpa ujung. Bisakah kamu menemukan jalan keluar?";
+                    break;
+                case "film7":
+                    imgElement.src = 'cinema/PPS.jpg';
+                    hargaGlobal = 55000;
+                    currentTitle = "Perempuan Sial";
+                    sinopsisText = "Perjalanan spiritual yang mengharukan melintasi waktu dan kenangan.";
+                    break;
+                case "film8":
+                    imgElement.src = 'cinema/RS.jpg';
+                    hargaGlobal = 50000;
+                    currentTitle = "Red Sonja";
+                    sinopsisText = "Horor mencekam tentang rahasia gelap di balik ilmu hitam kuno.";
+                    break;
+                default:
+                    hargaGlobal = 0;
+                    currentTitle = "Judul Film";
+                    sinopsisText = "Silahkan pilih film dari daftar.";
             }
-            const format = harga.toLocaleString('id-ID')
-            document.getElementById('harga').textContent = `Rp${format}`;
-            document.getElementById('sinopsis').textContent = sinopsis;
+
+            // Update UI
+            judulElement.textContent = currentTitle;
+            sinopsisElement.textContent = sinopsisText;
+            hargaDisplay.textContent = `Rp${hargaGlobal.toLocaleString('id-ID')}`;
+            
+            // Auto-update total when film changes
+            hitung(); 
         });
+
         function hitung(){
-            let j_tiket = parseFloat(document.getElementById('j_tiket').value);
-            // let h_tiket = parseFloat(document.getElementById('harga').value);
-            let bayar = harga * j_tiket;
-            const format = bayar.toLocaleString('id-ID');
-            document.getElementById('bayar').textContent = `Rp${format}`;
+            const j_tiket = parseFloat(document.getElementById('j_tiket').value) || 0;
+            const totalBayar = hargaGlobal * j_tiket;
+            document.getElementById('bayar').textContent = `Rp${totalBayar.toLocaleString('id-ID')}`;
         }
+
+        // Listen for quantity changes
+        document.getElementById('j_tiket').addEventListener('input', hitung);
     </script>
 </body>
 </html>

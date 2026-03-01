@@ -1,176 +1,115 @@
-/* *{
-    background-color: linear-gradient(180deg, rgb(238, 92, 94), rgb(223, 1, 38));
-} */
-
-/* .container {
-     background-color: aliceblue;
-    height: 80vh;
-    width: 90%;
-    display: flex;
-    justify-content: center;
-    margin-left: 55px;
-} */
-
-/* .index {
-    background: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    margin-top: 50px;
-    height: 70vh;
-    width: 40%;
-    text-align: left;
-    border-radius: 140px;
-    /* box-shadow: 10px 10px 2px 2px rgb(35, 33, 33); */
-
-/* .index p {
-    font-size: 13pt;
-    background-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    padding-left: 130px;
-} */
-
-/* .ind1 p {
-    font-size: 13pt;
-    background-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    padding-left: 20px;
-    padding-top: 3px;
-} */
-
-/* .yui8 p {
-    padding-left: 10px;
-} */
-
-
-
-/* input{
-    background-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    color: black;
-    border-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    border-radius: 6px;
-    height: 20px;
-    width: 300px;
-    margin-left: 40px;
-} */
-
-/* button {
-    background-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    color: black;
-    /* margin-bottom: 1203px; */
-    /* border-radius: 6px;
-    border-color: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25));
-    width: 300px;
-    height: 35px;
-    margin-left: 55px;
-    margin-bottom: 20px; */
-
-
-/* h2 {
-    /* background: linear-gradient(80deg, rgb(254, 12, 12), rgb(237, 233, 25)); */
-    /* font-size : 14pt; */
-    /* margin-left: 75pt; */
-
-/* .hasil {
-    background-color: white;
-}  */
+/* --- Base Styling & Reset --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 body {
-   background-color: #bdaaaa;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Creates a nice modern gradient background */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    padding: 20px;
 }
 
-/* .display{ */
-     /* display: flex; */
-/* } */
+/* --- Header Styling --- */
+.container {
+    margin-bottom: 20px;
+    text-align: center;
+}
 
 .container h2 {
-    background-color: #d9d9d9;
-    margin-top: 20px;
-    height: 70px;
-    width: 730px;
-    margin-left: 65px;
-    border-radius: 8px;
-    box-shadow: 5px 5px 2px 2px rgba(33, 39, 39, 0.484);
+    color: #ffffff;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-    padding-top: 20pt;
-    padding-left: 265pt;
-    color: bold;
-    font-size: 20pt;
-
-}
-
+/* --- Main Card Layout --- */
 .index {
-    background-color: #d9d9d9;
-    /* margin-bottom: 20px; */
-    width: 530px;
-    height: 345px;
-    margin-top: 30px;
-    margin-left: 68px;
-    border-radius: 14px;
-    box-shadow: 5px 5px 2px 2px rgba(33, 39, 39, 0.484);
-    text-align: left;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px; /* Limits width on large screens */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Adds space between the sections */
 }
 
-.number p {
-    padding-left: 20pt;
-    padding-top: 20px;
-    font-size: 13pt;
+/* --- Form Groups --- */
+.number, .ind1 {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-input[id="b1"], input[type="number"] {
-    width: 80%;
-    padding: 7px;
-    border: 0;
-    box-sizing: border-box;
-    background-color: white;
-    border-radius: 4px;
-    color: black;
-    margin-left: 25px;
-    margin-bottom: 5px;
+p {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
 }
 
-.ind1 p {
-    padding-left: 20pt;
-    padding-bottom: 10px;
-    font-size: 13pt;
+/* --- Inputs and Selects --- */
+input[type="number"], select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e1e1e1;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9;
 }
 
-select[name=""], input[id="awal"]{
-    width: 80%;
-    height: 120%;
-    padding: 7px;
-    border: 0;
-    box-sizing: border-box;
-    background-color: white;
-    border-radius: 4px;
-    color: black;
-    margin-left: 25px;
-    /* margin-bottom: 2px; */
-    margin-top: -40px;
+input[type="number"]:focus, select:focus {
+    border-color: #667eea;
+    background-color: #fff;
 }
 
-.index button {
-    background-color: #0fac46;
-    border: 0;
-    height: 30px;
-    width: 80px;
-    margin-top: 13px;
-    margin-left: 25px;
-    border-radius: 6px;
+/* --- Button Styling --- */
+button {
+    margin-top: 10px;
+    padding: 14px;
+    background-color: #667eea;
     color: white;
-     box-shadow: 2px 2px 2px 2px rgba(33, 39, 39, 0.484);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-.ind2{
-    background-color: #d9d9d9;
+button:hover {
+    background-color: #5a6fd6;
+}
+
+button:active {
+    transform: scale(0.98); /* Slight click effect */
+}
+
+/* --- Result Section --- */
+.ind2 {
     text-align: center;
-    margin-left: 570px;
-    height: 59vh;
-    width: 40vw;
-    border-radius: 14px;
-    font-size: 14pt;
-    box-shadow: 5px 5px 2px 2px rgba(33, 39, 39, 0.484);
-    margin-top: -348px;
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 2px dashed #e1e1e1;
 }
 
 .ind2 p {
-    padding-top: 10pt;
+    color: #777;
+}
+
+#hasil {
+    margin-top: 10px;
+    color: #2eca6a; /* Distinct green color for the result */
+    font-size: 2rem;
+    word-break: break-all; /* Prevents long numbers from breaking the box */
 }

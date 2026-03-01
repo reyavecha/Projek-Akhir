@@ -3,487 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Simple By Rayner</title>
     <style>
-        body {
+        /* --- General Setup --- */
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+
+        body {
+            background-color: #f8f9fa;
+        }
+
+        /* --- Header --- */
+        .upper {
+            background-color: maroon;
+            padding: 20px;
+            text-align: center;
+            color: aliceblue;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* --- Layout Container --- */
         .all {
             display: flex;
+            flex-direction: row;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
         }
-        .upper{
-            background-color: maroon;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: aliceblue;
-            /* margin-right: 10px; */
-        }
+
+        /* --- Questions Section --- */
         .questions {
-            /* border: red solid 2px; */
-            width: 65%;
-            height: 85vh;
-            overflow-x: hidden;
-            padding-left: 20px;
+            flex: 2;
+            width: 100%;
         }
+
+        /* Question Box (Replaces b1, b2, b3... with one class) */
+        .question-box {
+            background-color: maroon;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .question-box p {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .ans-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .ans-container label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 5px;
+            transition: background 0.2s;
+        }
+
+        /* --- Score Section (Sidebar) --- */
         .NA {
-            /* border: pink solid 2px; */
-            width: 30%;
-            margin-left: 100px;
-            /* align-items: center; */
+            flex: 1;
+            min-width: 250px;
         }
-        .b1 {
-            width: 90%;
-            height: 25vh;
+
+        .score-card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            position: sticky;
+            top: 100px; /* Floats on desktop */
+        }
+
+        .score-card h4 {
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 1.2rem;
+        }
+
+        #hasil {
             background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q1 {
             color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            padding-top: 1px;
-        }
-        .ans1 {
-            color: white;
-            /* padding-top: -5px; */
-            font-size: 10pt;
-        }
-         .b2 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q2 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans2 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b3 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q3 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans3 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b4 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q4 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans4 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b5 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q5 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans5 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b6 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q6 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans6 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b7 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q7 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans7 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b8 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q8 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans8 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b9 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q9 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans9 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        .b10 {
-            width: 90%;
-            height: 25vh;
-            background-color: maroon;
-            /* margin-left: 20px; */
-            padding-left: 10px;
-            /* padding-top: 10px; */
-            margin-top: 20px;
-            border-radius: 10px;
-            box-shadow: 5px 5px 2px 2px rgba(0, 0, 0, 0.299);
-        }
-        .q10 {
-            color: white;
-            padding-left: 10px;
-            /* padding-top: px; */
-            /* padding-bottom: -1000px; */
-            /* padding-top: 1px; */
-            /* padding-top: 0.25px; */
-            padding-top: 1px;
-        }
-        .ans10 {
-            color: white;
-            font-size: 10pt;
-            /* padding-top: -5px; */
-        }
-        h4 {
-            font-size: 16pt;
-            /* padding-bottom: -10pt; */
-        }
-        /* h1 { */
-           
-            
-        /* } */
-        /* #hasil {
+            font-size: 5rem;
+            width: 140px;
+            height: 140px;
+            display: flex;
             align-items: center;
             justify-content: center;
-        } */
-        .Nilai {
-            /* border: red solid 2px; */
-            /* height: 60%; */
-            height: 50vh;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 4px solid #ffd700;
         }
-        .Nilai h1 {
-             background-color: maroon;
-            color: white;
-            /* border: red solid 2px; */
-            width: 70%;
-            height: 70%;
-            border-radius: 8px;
-            margin-left: 55px;
-            margin-top: 1px;
-             margin-bottom: -20px;
-             align-items: center;
-            justify-content: center;
-            display: flex;
-            font-size: 75pt;
-            
-        }
-        .Nilai h4 {
-            /* padding-top: 100px;
-            padding-left: 120px; */
-            margin-bottom: 20px;
-            margin-left: 115px;
-            font-weight: bold;
-            font-size: 18pt;
-        }
-        button {
+
+        .btn-selesai {
             background-color: maroon;
-            width: 7vw;
-            height: 5vh;
-            border: 0;
-            color: aliceblue;
+            color: white;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            font-size: 1rem;
+            font-weight: bold;
             border-radius: 10px;
-            margin-left: 55px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn-selesai:active {
+            transform: scale(0.95);
+        }
+
+        /* Locked State Style */
+        .terkunci {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* --- RESPONSIVE: iPhone SE & Mobile --- */
+        @media (max-width: 768px) {
+            .all {
+                flex-direction: column; /* Stack score and questions */
+            }
+
+            .NA {
+                order: -1; /* Score appears at TOP on mobile */
+            }
+
+            .score-card {
+                position: relative;
+                top: 0;
+                margin-bottom: 10px;
+            }
+
+            #hasil {
+                font-size: 3.5rem;
+                width: 100px;
+                height: 100px;
+            }
+
+            .question-box p {
+                font-size: 1rem;
+            }
+        }
+
+        /* Special tweak for very small screens (iPhone SE) */
+        @media (max-width: 375px) {
+            .upper h2 { font-size: 1.2rem; }
+            .question-box { padding: 15px; }
+            .ans-container label { font-size: 13px; }
         }
     </style>
 </head>
 <body>
+
     <div class="upper">
-     <h2>Quiz Simple By Rayner</h2>
+        <h2>Quiz Simple By Rayner</h2>
     </div>
-    <!-- <p>Soal 1 : Contoh Mendeklarasikan Variable Yang Benar ?</p>
-    <span><input type="radio" name="soal1" value="a">a. let</span><br>
-    <span><input type="radio" name="soal1" value="b">b. var</span><br>
-    <span><input type="radio" name="soal1" value="c">c. const</span><br>
-    <span><input type="radio" name="soal1" value="d">d. conts</span><br>
 
-    <p>Soal 2 : Apa Fungsi Yang Digunakan Untuk Memanggil ID dari Html ?</p>
-    <span><input type="radio" name="soal2" value="a">a. document.getElementById</span><br>
-    <span><input type="radio" name="soal2" value="b">b. document.getElementByClass</span><br>
-    <span><input type="radio" name="soal2" value="c">c. document.getElementByName</span><br>
-    <span><input type="radio" name="soal2" value="d">d. document.getElementByTag</span><br>
-    <p>hasil : <span id="hasil"></span></p> -->
     <div class="all">
-    <div class="questions">
-        <div class="b1">
-        <div class="q1">
-         <p>1. : Apa Fungsi dari document.getElementByTag ?</p>
+        <div class="questions">
+            
+            <div class="question-box">
+                <p>1. Apa Fungsi dari document.getElementByTag?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal1" value="a"> a. Untuk Memanggil Class</label>
+                    <label><input type="radio" name="soal1" value="b"> b. Untuk Memanggil ID</label>
+                    <label><input type="radio" name="soal1" value="c"> c. Untuk Mendeklarasikan Variable</label>
+                    <label><input type="radio" name="soal1" value="d"> d. Untuk Menentukan Tag</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>2. Contoh Mendeklarasikan Variable Yang Salah, Kecuali?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal2" value="a"> a. let</label>
+                    <label><input type="radio" name="soal2" value="b"> b. var</label>
+                    <label><input type="radio" name="soal2" value="c"> c. const</label>
+                    <label><input type="radio" name="soal2" value="d"> d. conts</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>3. Apa Fungsi yang digunakan untuk memanggil class dari html?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal3" value="a"> a. getElementById</label>
+                    <label><input type="radio" name="soal3" value="b"> b. getElementByClass</label>
+                    <label><input type="radio" name="soal3" value="c"> c. getElementByName</label>
+                    <label><input type="radio" name="soal3" value="d"> d. getElementByTag</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>4. Apa Fungsi yang digunakan untuk memanggil name dari html?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal4" value="a"> a. getElementById</label>
+                    <label><input type="radio" name="soal4" value="b"> b. getElementByClass</label>
+                    <label><input type="radio" name="soal4" value="c"> c. getElementByName</label>
+                    <label><input type="radio" name="soal4" value="d"> d. getElementByTag</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>5. Apa Fungsi Dari == ?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal5" value="a"> a. Menyambungkan kode</label>
+                    <label><input type="radio" name="soal5" value="b"> b. Memanggil Class</label>
+                    <label><input type="radio" name="soal5" value="c"> c. Membandingkan Nilai</label>
+                    <label><input type="radio" name="soal5" value="d"> d. Sama Dengan</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>6. Apa definisi dari undefined?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal6" value="a"> a. Nilai kosong</label>
+                    <label><input type="radio" name="soal6" value="b"> b. Variable dibuat tapi tidak ada nilainya</label>
+                    <label><input type="radio" name="soal6" value="c"> c. Tidak bisa dihitung</label>
+                    <label><input type="radio" name="soal6" value="d"> d. Tidak ada arti</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>7. Apa Fungsi Splice()?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal7" value="a"> a. Menghapus elemen di array asli</label>
+                    <label><input type="radio" name="soal7" value="b"> b. Memotong Variable</label>
+                    <label><input type="radio" name="soal7" value="c"> c. Mempecahkan class</label>
+                    <label><input type="radio" name="soal7" value="d"> d. Memberi Id</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>8. Apa yang harus diketik untuk komentar di JS?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal8" value="a"> a. *</label>
+                    <label><input type="radio" name="soal8" value="b"> b. //</label>
+                    <label><input type="radio" name="soal8" value="c"> c. -></label>
+                    <label><input type="radio" name="soal8" value="d"> d. +</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>9. Operator untuk membandingkan nilai DAN tipe?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal9" value="a"> a. ==</label>
+                    <label><input type="radio" name="soal9" value="b"> b. !=</label>
+                    <label><input type="radio" name="soal9" value="c"> c. ===</label>
+                    <label><input type="radio" name="soal9" value="d"> d. =</label>
+                </div>
+            </div>
+
+            <div class="question-box">
+                <p>10. Cara benar menulis pernyataan if?</p>
+                <div class="ans-container">
+                    <label><input type="radio" name="soal10" value="a"> a. if x-90</label>
+                    <label><input type="radio" name="soal10" value="b"> b. if es teh manis</label>
+                    <label><input type="radio" name="soal10" value="c"> c. if 78920+290 = 90</label>
+                    <label><input type="radio" name="soal10" value="d"> d. Semua Jawaban Salah</label>
+                </div>
+            </div>
         </div>
-        <div class="ans1">
-         <span><input type="radio" name="soal1" value="a">a. Untuk Memanggil Class</span><br>
-         <span><input type="radio" name="soal1" value="b">b. Untuk Memanggil ID</span><br>
-         <span><input type="radio" name="soal1" value="c">c. Untuk Mendeklarasikan Variable</span><br>
-         <span><input type="radio" name="soal1" value="d">d. Untuk Menentukan Tag</span><br>
-        </div> 
-        </div>
-        <div class="b2">
-        <div class="q2">
-         <p>2. : Contoh Mendeklarasikan Variable Yang Salah, Kecuali ?</p>
-        </div>
-        <div class="ans2">
-         <span><input type="radio" name="soal2" value="a">a. let</span><br>
-         <span><input type="radio" name="soal2" value="b">b. var</span><br>
-         <span><input type="radio" name="soal2" value="c">c. const</span><br>
-         <span><input type="radio" name="soal2" value="d">d. conts</span><br>
-        </div>
-        </div>
-        <div class="b3">
-        <div class="q3">
-         <p>3. : Apa Fungsi yang digunakan untuk memanggil class dari html ?</p>
-        </div>
-        <div class="ans3">
-         <span><input type="radio" name="soal3" value="a">a. document.getElementById</span><br>
-         <span><input type="radio" name="soal3" value="b">b. document.getElementByClass</span><br>
-         <span><input type="radio" name="soal3" value="c">c. document.getElementByName</span><br>
-         <span><input type="radio" name="soal3" value="d">d. document.getElementByTag</span><br>
-        </div>
-        </div>
-        <div class="b4">
-        <div class="q4">
-         <p>4. : Apa Fungsi yang digunakan untuk memanggil name dari html ?</p>
-        </div>
-        <div class="ans4">
-         <span><input type="radio" name="soal4" value="a">a. document.getElementById</span><br>
-         <span><input type="radio" name="soal4" value="b">b. document.getElementByClass</span><br>
-         <span><input type="radio" name="soal4" value="c">c. document.getElementByName</span><br>
-         <span><input type="radio" name="soal4" value="d">d. document.getElementByTag</span><br>
-        </div>
-        </div>
-        <div class="b5">
-        <div class="q5">
-         <p>5. : Apa Fungsi Dari == ?</p>
-        </div>
-        <div class="ans5">
-         <span><input type="radio" name="soal5" value="a">a. Menyambung kan kode</span><br>
-         <span><input type="radio" name="soal5" value="b">b. Memanggil Class</span><br>
-         <span><input type="radio" name="soal5" value="c">c. Membandingkan Nilai</span><br>
-         <span><input type="radio" name="soal5" value="d">d. Sama Dengan</span><br>
-        </div>
-        </div>
-        <div class="b6">
-        <div class="q6">
-         <p>6. : Apa definisi dari undefined ?</p>
-        </div>
-        <div class="ans6">
-         <span><input type="radio" name="soal6" value="a">a. nilai kosong</span><br>
-         <span><input type="radio" name="soal6" value="b">b. Variable yang sudah di buat tapi tidak ada nilanya</span><br>
-         <span><input type="radio" name="soal6" value="c">c. tidak bisa dihitung</span><br>
-         <span><input type="radio" name="soal6" value="d">d. tidak ada arti</span><br>
-        </div>
-        </div>
-        <div class="b7">
-        <div class="q7">
-         <p>7. : Apa Fungsi Splice()</p>
-        </div>
-        <div class="ans7">
-         <span><input type="radio" name="soal7" value="a">a. Menghapus elemen di array asli</span><br>
-         <span><input type="radio" name="soal7" value="b">b. Memotong Variable</span><br>
-         <span><input type="radio" name="soal7" value="c">c. Mempecahkan class</span><br>
-         <span><input type="radio" name="soal7" value="d">d. Memberi Id</span><br>
-        </div>
-        </div>
-        <div class="b8">
-        <div class="q8">
-         <p>8. : Apa yang harus di ketik untuk membuat komentar di JS?</p>
-        </div>
-        <div class="ans8">
-         <span><input type="radio" name="soal8" value="a">a. *</span><br>
-         <span><input type="radio" name="soal8" value="b">b. //</span><br>
-         <span><input type="radio" name="soal8" value="c">c. -></span><br>
-         <span><input type="radio" name="soal8" value="d">d. +</span><br>
-        </div>
-        </div>
-        <div class="b9">
-        <div class="q9">
-         <p>9. : Operator mana yang digunakan untuk membandingkan nilai dan tipe?</p>
-        </div>
-        <div class="ans9">
-         <span><input type="radio" name="soal9" value="a">a. ==</span><br>
-         <span><input type="radio" name="soal9" value="b">b. !=</span><br>
-         <span><input type="radio" name="soal9" value="c">c. ===</span><br>
-         <span><input type="radio" name="soal9" value="d">d. =</span><br>
-        </div>
-        </div>
-        <div class="b10">
-        <div class="ans10">
-         <p>10. : Bagaimana cara yang benar untuk menulis pernyataan if?</p>
-        </div>
-        <div class="ans10">
-         <span><input type="radio" name="soal10" value="a">a. if x-90 </span><br>
-         <span><input type="radio" name="soal10" value="b">b. if es teh manis</span><br>
-         <span><input type="radio" name="soal10" value="c">c. if 78920+290 = 90</span><br>
-         <span><input type="radio" name="soal10" value="d">d. Semua Jawaban Salah</span><br>
-        </div>
+
+        <div class="NA">
+            <div class="score-card">
+                <h4>Nilai Anda</h4>
+                <h1 id="hasil">0</h1>
+                <button class="btn-selesai" onclick="cekJawaban()">Selesai</button>
+            </div>
         </div>
     </div>
-    <div class="NA">
-     <!-- <p>Nilai Anda : <span id="hasil"></span><br></p> -->
-      <div class="score">
-       <div class="Nilai">
-        <h4>Nilai Anda</h4> <br> <h1 id="hasil"></h1>
-       </div>
-       <button onclick="cekJawaban()">Selesai</button>
-      </div>
-    </div>
-    </div>
+
     <script> 
-        const semuaRadio = document.querySelectorAll ('input[type="radio"]');
-            semuaRadio.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    const namaSoal = this.name;
-                    const radioSatuSoal = document.querySelectorAll(`input[name="${namaSoal}"]`);
+        // Logic to lock radio buttons after selection
+        const semuaRadio = document.querySelectorAll('input[type="radio"]');
+        semuaRadio.forEach(radio => {
+            radio.addEventListener('change', function() {
+                const namaSoal = this.name;
+                const radioSatuSoal = document.querySelectorAll(`input[name="${namaSoal}"]`);
+                radioSatuSoal.forEach(r => {
+                    r.disabled = true;
+                    r.parentElement.classList.add("terkunci");
+                });
+            });
+        });
 
-                    // Disable semuadocument.getElementById('hasil').innerHTML = ""; radio button pada soal ini
-                    radioSatuSoal.forEach(r => {
-                        r.disabled = true;
-                        r.parentElement.classList.add("terkunci");
-                    })
-                })
-            })
-            function cekJawaban(){
-                let skor = 0;
+        // Scoring Logic
+        function cekJawaban(){
+            let skor = 0;
+            const kunci = {
+                soal1 : 'd', soal2 : 'd', soal3 : 'b', soal4 : 'c', soal5 : 'c',
+                soal6 : 'b', soal7 : 'a', soal8 : 'b', soal9 : 'c', soal10 : 'd'
+            };
 
-                const kunci = {
-                    soal1 : 'd',
-                    soal2 : 'd',
-                    soal3 : 'b',
-                    soal4 : 'c',
-                    soal5 : 'c',
-                    soal6 : 'b',
-                    soal7 : 'a',
-                    soal8 : 'b',
-                    soal9 : 'c',
-                    soal10 : 'd'
-                };
-
-                for(let nomor in kunci){
-                    let jawaban = document.querySelector(`input[name="${nomor}"]:checked`);
-                    if(jawaban && jawaban.value === kunci[nomor]){
-                        skor += 10;
-                    }
+            for(let nomor in kunci){
+                let jawaban = document.querySelector(`input[name="${nomor}"]:checked`);
+                if(jawaban && jawaban.value === kunci[nomor]){
+                    skor += 10;
                 }
-                document.getElementById('hasil').innerHTML = skor;
             }
+            document.getElementById('hasil').innerHTML = skor;
+            
+            // On mobile, scroll back up so the user can see their score
+            if(window.innerWidth < 768) {
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
+        }
     </script>
 </body>
 </html>
